@@ -1,6 +1,8 @@
 ﻿namespace SwissTransport.Core
 {
     using System;
+    using System.Collections.Generic;
+    using System.Globalization;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Newtonsoft.Json;
@@ -39,7 +41,7 @@
             return this.GetObject<StationBoardRoot>(uri);
         }
 
-        public Connections GetConnections(string fromStation, string toStation)
+        public Connections GetConnections(string fromStation, string toStation, int connectionLimit, DateTime departureDate, DateTime departureTime)
         {
             if (string.IsNullOrEmpty(fromStation))
             {
@@ -51,7 +53,13 @@
                 throw new ArgumentNullException(nameof(toStation));
             }
 
-            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}");
+            if (connectionLimit < 1 || connectionLimit > 16)
+            {
+                throw new ArgumentOutOfRangeException(nameof(connectionLimit));
+            }
+
+            // TODO: check departure time
+            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}&limit={connectionLimit}&date={departureDate.ToString("yyyy-MM-dd")}&time={departureTime.ToString("HH:mm")}");
             return this.GetObject<Connections>(uri);
         }
 

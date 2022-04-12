@@ -13,46 +13,48 @@ namespace SwissTransportGUI.Views
 {
     internal class ConnectionsTableView
     {
-        public TabPage connectionsTab { get; set; } = new();
-        private SplitContainer splitContainerConnections { get; set; } = new();
-        private TableLayoutPanel tableLayoutPanelConnections { get; set; } = new();
-        private Label labelTo { get; set; } = new();
-        private SearchStationComponent textBoxTo { get; set; } = new(0, 0);
-        private Label labelFrom { get; set; } = new();
-        private SearchStationComponent textBoxFrom { get; set; } = new(0, 0);
-        private DataGridView dataGridViewConnections { get; set; } = new();
-        private DataGridViewTextBoxColumn dataGridViewColumnFrom { get; set; } = new();
-        private DataGridViewTextBoxColumn dataGridViewColumnDepartureTime { get; set; } = new();
-        private DataGridViewTextBoxColumn dataGridViewColumnTo { get; set; } = new();
-        private DataGridViewTextBoxColumn dataGridViewColumnArrivalTime { get; set; } = new();
-        private DataGridViewTextBoxColumn dataGridViewColumnDuration { get; set; } = new();
-        private DataGridViewTextBoxColumn dataGridViewColumnDelay { get; set; } = new();
-        private Label labelDate { get; set; } = new();
-        private DateTimePicker datePicker { get; set; } = new();
-        private Label labelTime { get; set; } = new();
-        private DateTimePicker timePicker { get; set; } = new();
-        private Button searchButton { get; set; } = new();
-        private TableLayoutPanel additionalButtonLayoutPanel { get; set; } = new();
+        public TabPage ConnectionsTab { get; set; } = new();
+        private SplitContainer SplitContainerConnections { get; set; } = new();
+        private TableLayoutPanel TableLayoutPanelConnections { get; set; } = new();
+        private Label LabelTo { get; set; } = new();
+        private SearchStationComponent TextBoxTo { get; set; } = new(0, 0);
+        private Label LabelFrom { get; set; } = new();
+        private SearchStationComponent TextBoxFrom { get; set; } = new(0, 0);
+        private DataGridView DataGridViewConnections { get; set; } = new();
+        private DataGridViewTextBoxColumn DataGridViewColumnFrom { get; set; } = new();
+        private DataGridViewTextBoxColumn DataGridViewColumnDepartureTime { get; set; } = new();
+        private DataGridViewTextBoxColumn DataGridViewColumnTo { get; set; } = new();
+        private DataGridViewTextBoxColumn DataGridViewColumnArrivalTime { get; set; } = new();
+        private DataGridViewTextBoxColumn DataGridViewColumnDuration { get; set; } = new();
+        private DataGridViewTextBoxColumn DataGridViewColumnDelay { get; set; } = new();
+        private Label LabelDate { get; set; } = new();
+        private DateTimePicker DatePicker { get; set; } = new();
+        private Label LabelTime { get; set; } = new();
+        private DateTimePicker TimePicker { get; set; } = new();
+        private Button SearchButton { get; set; } = new();
         private SearchConnectionController ConnectionController { get; set; }
         private bool DatePickerFilledOut { get; set; } = false;
         private bool TimePickerFilledOut { get; set; } = false;
         private ConnectionModel SelectedConnection { get; set; } = new();
+        
         public ConnectionsTableView()
         {
             ConnectionController = new SearchConnectionController();
 
             InitControls();
 
-            dataGridViewConnections.DataSource = ConnectionController.Connections;
+            DataGridViewConnections.DataSource = ConnectionController.Connections;
         }
+        //
+        //Initializing controls
+        //
         private void InitControls()
         {
             Font searchBoxFont = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-
             // 
             // connectionsTab
             // 
-            this.connectionsTab = new TabPage()
+            this.ConnectionsTab = new TabPage()
             {
                 BackColor = Color.White,
                 BackgroundImageLayout = ImageLayout.Center,
@@ -64,12 +66,10 @@ namespace SwissTransportGUI.Views
                 TabIndex = 0,
                 Text = "Verbindungen Suchen",
             };
-
-
             // 
             // splitContainerConnections
             // 
-            this.splitContainerConnections = new SplitContainer()
+            this.SplitContainerConnections = new SplitContainer()
             {
                 Cursor = Cursors.Default,
                 Dock = DockStyle.Fill,
@@ -88,11 +88,10 @@ namespace SwissTransportGUI.Views
                 SplitterWidth = 3,
                 TabIndex = 0,
             };
-
             // 
             // tableLayoutPanelConnections
             // 
-            this.tableLayoutPanelConnections = new TableLayoutPanel()
+            this.TableLayoutPanelConnections = new TableLayoutPanel()
             {
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Top,
                 Dock = DockStyle.Fill,
@@ -107,34 +106,33 @@ namespace SwissTransportGUI.Views
             // 
             // labelTo
             // 
-            this.labelTo = new Label()
+            this.LabelTo = new Label()
             {
                 Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Right))),
                 AutoSize = true,
-                Location = new Point(91, 42),
+                Location = new Point(427, 0),
                 Name = "labelTo",
                 Size = new Size(19, 43),
                 TabIndex = 5,
-                Text = "To",
+                Text = "Nach:",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
             // 
             // textBoxTo
             // 
-            this.textBoxTo = new SearchStationComponent(116, 44);
-            this.textBoxTo.textBoxSearch.Margin = new Padding(0);
-            this.textBoxTo.textBoxSearch.Font = searchBoxFont;
+            this.TextBoxTo = new SearchStationComponent(427, 0);
+            this.TextBoxTo.TextBoxSearch.Margin = new Padding(0);
+            this.TextBoxTo.TextBoxSearch.Font = searchBoxFont;
             // 
             // textBoxFrom
             // 
-            this.textBoxFrom = new SearchStationComponent(116, 2);
-            this.textBoxFrom.textBoxSearch.Margin = new Padding(0);
-            this.textBoxFrom.textBoxSearch.Font = searchBoxFont;
-
+            this.TextBoxFrom = new SearchStationComponent(116, 2);
+            this.TextBoxFrom.TextBoxSearch.Margin = new Padding(0);
+            this.TextBoxFrom.TextBoxSearch.Font = searchBoxFont;
             // 
             // labelFrom
             // 
-            this.labelFrom = new Label()
+            this.LabelFrom = new Label()
             {
                 Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Right))),
                 AutoSize = true,
@@ -142,29 +140,27 @@ namespace SwissTransportGUI.Views
                 Name = "labelFrom",
                 Size = new Size(35, 42),
                 TabIndex = 4,
-                Text = "From",
+                Text = "Von:",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
-
             // 
             // labelDate
             // 
-            this.labelDate = new Label()
+            this.LabelDate = new Label()
             {
                 Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Right))),
                 AutoSize = true,
-                Location = new Point(427, 0),
+                Location = new Point(91, 42),
                 Name = "labelDate",
                 Size = new Size(23, 42),
                 TabIndex = 1,
-                Text = "Date",
+                Text = "Datum:",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
-
             // 
             // labelTime
             // 
-            this.labelTime = new Label()
+            this.LabelTime = new Label()
             {
                 Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Right))),
                 AutoSize = true,
@@ -172,27 +168,25 @@ namespace SwissTransportGUI.Views
                 Name = "labelTime",
                 Size = new Size(23, 42),
                 TabIndex = 1,
-                Text = "Time",
+                Text = "Uhrzeit:",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
-
             //
             // datePicker
             //
-            this.datePicker = new DateTimePicker()
+            this.DatePicker = new DateTimePicker()
             {
                 Format = DateTimePickerFormat.Short,
-                Location = new Point(0, 0),
+                Location = new Point(116, 44),
                 MaxDate = DateTime.Today.AddDays(14), // in 2 Weeks
                 MinDate = DateTime.Today,
                 Value = DateTime.Today,
                 Anchor = AnchorStyles.Right | AnchorStyles.Left,
             };
-
             //
             // timePicker
             //
-            this.timePicker = new DateTimePicker()
+            this.TimePicker = new DateTimePicker()
             {
                 Format = DateTimePickerFormat.Time,
                 Location = new Point(0, 0),
@@ -202,24 +196,10 @@ namespace SwissTransportGUI.Views
                 Value = new DateTime(2022, 1, 1, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second),
                 Anchor = AnchorStyles.Right | AnchorStyles.Left,
             };
-
-            // 
-            // additionalButtonLayoutPanel
-            // 
-            this.additionalButtonLayoutPanel = new TableLayoutPanel()
-            {
-                Dock = DockStyle.Fill,
-                ColumnCount = 2,
-                Location = new Point(0, 0),
-                Margin = new Padding(3, 2, 3, 2),
-                Name = "additionalButtonLayoutPanel",
-                RowCount = 1,
-            };
-
             // 
             // searchButton
             // 
-            this.searchButton = new Button()
+            this.SearchButton = new Button()
             {
                 Cursor = Cursors.Hand,
                 Dock = DockStyle.Fill,
@@ -232,11 +212,10 @@ namespace SwissTransportGUI.Views
                 UseVisualStyleBackColor = false,
                 ForeColor = Color.Blue
             };
-
             // 
             // dataGridViewConnections
             // 
-            this.dataGridViewConnections = new DataGridView()
+            this.DataGridViewConnections = new DataGridView()
             {
                 AllowUserToAddRows = false,
                 AllowUserToDeleteRows = false,
@@ -258,12 +237,10 @@ namespace SwissTransportGUI.Views
                 Size = new Size(686, 214),
                 TabIndex = 0,
             };
-
-
             // 
             // dataGridViewColumnFrom
             // 
-            this.dataGridViewColumnFrom = new DataGridViewTextBoxColumn()
+            this.DataGridViewColumnFrom = new DataGridViewTextBoxColumn()
             {
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DataPropertyName = "FromStation",
@@ -272,117 +249,108 @@ namespace SwissTransportGUI.Views
                 ReadOnly = true,
                 DisplayIndex = 0,
             };
-
             // 
             // dataGridViewColumnDepartureTime
             // 
-            this.dataGridViewColumnDepartureTime = new DataGridViewTextBoxColumn()
+            this.DataGridViewColumnDepartureTime = new DataGridViewTextBoxColumn()
             {
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DataPropertyName = "FromStationDepartureTime",
-                HeaderText = "Departure",
+                HeaderText = "Abreise",
                 Name = "dataGridViewColumnDepartureTime",
                 ReadOnly = true,
                 DisplayIndex = 1,
             };
-
             // 
             // dataGridViewColumnTo
             // 
-            this.dataGridViewColumnTo = new DataGridViewTextBoxColumn()
+            this.DataGridViewColumnTo = new DataGridViewTextBoxColumn()
             {
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DataPropertyName = "ToStation",
-                HeaderText = "To",
+                HeaderText = "Nach",
                 Name = "dataGridViewColumnTo",
                 ReadOnly = true,
                 DisplayIndex = 2,
             };
-
             // 
             // dataGridViewColumnArrivalTime
             // 
-            this.dataGridViewColumnArrivalTime = new DataGridViewTextBoxColumn()
+            this.DataGridViewColumnArrivalTime = new DataGridViewTextBoxColumn()
             {
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DataPropertyName = "ToStationArrivalTime",
-                HeaderText = "Arrival",
+                HeaderText = "Ankunft",
                 Name = "dataGridViewColumnArrivalTime",
                 ReadOnly = true,
                 DisplayIndex = 3,
             };
-
             // 
             // dataGridViewColumnDuration
             // 
-            this.dataGridViewColumnDuration = new DataGridViewTextBoxColumn()
+            this.DataGridViewColumnDuration = new DataGridViewTextBoxColumn()
             {
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DataPropertyName = "Duration",
-                HeaderText = "Duration",
+                HeaderText = "Dauer",
                 Name = "dataGridViewColumnDuration",
                 ReadOnly = true,
                 DisplayIndex = 4,
             };
-
             // 
             // dataGridViewColumnDelay
             // 
-            this.dataGridViewColumnDelay = new DataGridViewTextBoxColumn()
+            this.DataGridViewColumnDelay = new DataGridViewTextBoxColumn()
             {
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
                 DataPropertyName = "Delay",
-                HeaderText = "Delay",
+                HeaderText = "Verspätung",
                 Name = "dataGridViewColumnDelay",
                 ReadOnly = true,
                 DisplayIndex = 5,
             };
-
-            // Adding Elements to Containers
-            this.connectionsTab.Controls.Add(this.splitContainerConnections);
-            this.splitContainerConnections.Panel1.Controls.Add(this.tableLayoutPanelConnections);
-            this.splitContainerConnections.Panel2.Controls.Add(this.dataGridViewConnections);
-
-            this.tableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            this.tableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            this.tableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            this.tableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            this.tableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-            this.tableLayoutPanelConnections.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
-            this.tableLayoutPanelConnections.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
-            this.tableLayoutPanelConnections.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
-            this.tableLayoutPanelConnections.Controls.Add(this.labelFrom, 0, 0);
-            this.tableLayoutPanelConnections.Controls.Add(this.textBoxFrom.textBoxSearch, 1, 0);
-            this.tableLayoutPanelConnections.Controls.Add(this.labelTo, 0, 1);
-            this.tableLayoutPanelConnections.Controls.Add(this.textBoxTo.textBoxSearch, 1, 1);
-            this.tableLayoutPanelConnections.Controls.Add(this.labelDate, 2, 0);
-            this.tableLayoutPanelConnections.Controls.Add(this.labelTime, 2, 1);
-            this.tableLayoutPanelConnections.Controls.Add(this.datePicker, 3, 0);
-            this.tableLayoutPanelConnections.Controls.Add(this.timePicker, 3, 1);
-            this.tableLayoutPanelConnections.Controls.Add(this.searchButton, 4, 2);
-
-
-            this.dataGridViewConnections.Columns.AddRange(new DataGridViewColumn[] {
-                this.dataGridViewColumnFrom,
-                this.dataGridViewColumnTo,
-                this.dataGridViewColumnDepartureTime,
-                this.dataGridViewColumnArrivalTime,
-                this.dataGridViewColumnDuration,
-                this.dataGridViewColumnDelay,
+            //
+            // Nesting controls in containers
+            //
+            this.ConnectionsTab.Controls.Add(this.SplitContainerConnections);
+            this.SplitContainerConnections.Panel1.Controls.Add(this.TableLayoutPanelConnections);
+            this.SplitContainerConnections.Panel2.Controls.Add(this.DataGridViewConnections);
+            this.TableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            this.TableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            this.TableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            this.TableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            this.TableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            this.TableLayoutPanelConnections.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+            this.TableLayoutPanelConnections.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+            this.TableLayoutPanelConnections.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+            this.TableLayoutPanelConnections.Controls.Add(this.LabelFrom, 0, 0);
+            this.TableLayoutPanelConnections.Controls.Add(this.TextBoxFrom.TextBoxSearch, 1, 0);
+            this.TableLayoutPanelConnections.Controls.Add(this.LabelTo, 2, 0);
+            this.TableLayoutPanelConnections.Controls.Add(this.TextBoxTo.TextBoxSearch, 3, 0);
+            this.TableLayoutPanelConnections.Controls.Add(this.LabelDate, 0, 1);
+            this.TableLayoutPanelConnections.Controls.Add(this.DatePicker, 1, 1);
+            this.TableLayoutPanelConnections.Controls.Add(this.LabelTime, 2, 1);
+            this.TableLayoutPanelConnections.Controls.Add(this.TimePicker, 3, 1);
+            this.TableLayoutPanelConnections.Controls.Add(this.SearchButton, 4, 0);
+            this.DataGridViewConnections.Columns.AddRange(new DataGridViewColumn[] {
+                this.DataGridViewColumnFrom,
+                this.DataGridViewColumnTo,
+                this.DataGridViewColumnDepartureTime,
+                this.DataGridViewColumnArrivalTime,
+                this.DataGridViewColumnDuration,
+                this.DataGridViewColumnDelay,
             });
+            this.ConnectionsTab.Controls.Add(this.TextBoxFrom.ListBoxSuggestions);
+            this.ConnectionsTab.Controls.Add(this.TextBoxTo.ListBoxSuggestions);
 
-            this.connectionsTab.Controls.Add(this.textBoxFrom.listBoxSuggestions);
-            this.connectionsTab.Controls.Add(this.textBoxTo.listBoxSuggestions);
-
-            // Event Handler
-            this.connectionsTab.Paint += new PaintEventHandler(this.ConnectionsTabPaint);
-            this.searchButton.Click += new EventHandler(this.SearchButtonClick);
-            this.textBoxFrom.textBoxSearch.TextChanged += new EventHandler(this.CheckFieldsCompletion);
-            this.textBoxTo.textBoxSearch.TextChanged += new EventHandler(this.CheckFieldsCompletion);
-            this.textBoxTo.textBoxSearch.GotFocus += new EventHandler(this.HideAllOtherAutoSuggestions);
-            this.textBoxFrom.textBoxSearch.GotFocus += new EventHandler(this.HideAllOtherAutoSuggestions);
-            this.datePicker.ValueChanged += new EventHandler(this.DatePickerValueChange);
-            this.timePicker.ValueChanged += new EventHandler(this.TimePickerValueChange);
+            // Event Handlers
+            this.SearchButton.Click += new EventHandler(this.SearchButtonClick);
+            this.TextBoxFrom.TextBoxSearch.TextChanged += new EventHandler(this.CheckFieldsCompletion);
+            this.TextBoxTo.TextBoxSearch.TextChanged += new EventHandler(this.CheckFieldsCompletion);
+            this.TextBoxTo.TextBoxSearch.GotFocus += new EventHandler(this.HideAllOtherAutoSuggestions);
+            this.TextBoxFrom.TextBoxSearch.GotFocus += new EventHandler(this.HideAllOtherAutoSuggestions);
+            this.DatePicker.ValueChanged += new EventHandler(this.DatePickerValueChange);
+            this.TimePicker.ValueChanged += new EventHandler(this.TimePickerValueChange);
         }
 
         private void HideAllOtherAutoSuggestions(object? sender, EventArgs e)
@@ -390,14 +358,14 @@ namespace SwissTransportGUI.Views
             TextBox s = (TextBox)sender;
 
             List<SearchStationComponent> inputFields = new List<SearchStationComponent>();
-            inputFields.Add(textBoxTo);
-            inputFields.Add(textBoxFrom);
+            inputFields.Add(TextBoxTo);
+            inputFields.Add(TextBoxFrom);
 
             foreach (SearchStationComponent field in inputFields)
             {
                 if (nameof(field) != nameof(s.Parent))
                 {
-                    field.listBoxSuggestions.Hide();
+                    field.ListBoxSuggestions.Hide();
                 }
             }
         }
@@ -415,14 +383,14 @@ namespace SwissTransportGUI.Views
         private void CheckFieldsCompletion(object? sender, EventArgs e)
         {
             // Enable Search Button, if from and to filled out
-            if (RegexController.IsValidSearchQuery(this.textBoxFrom.textBoxSearch.Text) == true
-                && RegexController.IsValidSearchQuery(this.textBoxTo.textBoxSearch.Text) == true)
+            if (RegexController.IsValidSearchQuery(this.TextBoxFrom.TextBoxSearch.Text) == true
+                && RegexController.IsValidSearchQuery(this.TextBoxTo.TextBoxSearch.Text) == true)
             {
-                this.searchButton.Enabled = true;
+                this.SearchButton.Enabled = true;
             }
             else
             {
-                this.searchButton.Enabled = false;
+                this.SearchButton.Enabled = false;
             }
         }
 
@@ -430,13 +398,13 @@ namespace SwissTransportGUI.Views
         {
             try
             {
-                if (this.TimePickerFilledOut && this.DatePickerFilledOut && RegexController.IsValidSearchQuery(this.textBoxFrom.SelectedStation.Name) && RegexController.IsValidSearchQuery(this.textBoxTo.SelectedStation.Name))
+                if (this.TimePickerFilledOut && this.DatePickerFilledOut && RegexController.IsValidSearchQuery(this.TextBoxFrom.SelectedStation.Name) && RegexController.IsValidSearchQuery(this.TextBoxTo.SelectedStation.Name))
                 {
-                    ConnectionController.GetConnections(textBoxFrom.SelectedStation.Name, textBoxTo.SelectedStation.Name, datePicker.Value, timePicker.Value);
+                    ConnectionController.GetConnections(TextBoxFrom.SelectedStation.Name, TextBoxTo.SelectedStation.Name, DatePicker.Value, TimePicker.Value);
                 }
-                else if (RegexController.IsValidSearchQuery(this.textBoxFrom.SelectedStation.Name) && RegexController.IsValidSearchQuery(this.textBoxTo.SelectedStation.Name))
+                else if (RegexController.IsValidSearchQuery(this.TextBoxFrom.SelectedStation.Name) && RegexController.IsValidSearchQuery(this.TextBoxTo.SelectedStation.Name))
                 {
-                    ConnectionController.GetConnections(textBoxFrom.SelectedStation.Name, textBoxTo.SelectedStation.Name);
+                    ConnectionController.GetConnections(TextBoxFrom.SelectedStation.Name, TextBoxTo.SelectedStation.Name);
                 }
             }
             catch (Exception ex)
@@ -444,22 +412,5 @@ namespace SwissTransportGUI.Views
                 MessageBox.Show($"Failed to get connection. Error occurred: {ex.Message}");
             }
         }
-
-        private void ConnectionsTabPaint(object sender, PaintEventArgs e)
-        {
-            this.textBoxFrom.textBoxSearch.Focus();
-            AdjustColumnOrder();
-        }
-
-        private void AdjustColumnOrder()
-        {
-            dataGridViewConnections.Columns["FromStation"].DisplayIndex = 0;
-            dataGridViewConnections.Columns["FromStationDepartureTime"].DisplayIndex = 1;
-            dataGridViewConnections.Columns["ToStation"].DisplayIndex = 2;
-            dataGridViewConnections.Columns["ToStationArrivalTime"].DisplayIndex = 3;
-            dataGridViewConnections.Columns["Duration"].DisplayIndex = 4;
-            dataGridViewConnections.Columns["Delay"].DisplayIndex = 5;
-        }
-
     }
 }

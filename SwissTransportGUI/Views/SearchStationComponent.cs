@@ -10,8 +10,8 @@ namespace SwissTransportGUI.Views
 {
     internal class SearchStationComponent
     {
-        public TextBox textBoxSearch { get; set; } = new();
-        public ListBox listBoxSuggestions { get; private set; } = new();
+        public TextBox TextBoxSearch { get; set; } = new();
+        public ListBox ListBoxSuggestions { get; private set; } = new();
 
         public Station SelectedStation { get; private set; }
 
@@ -30,7 +30,7 @@ namespace SwissTransportGUI.Views
             // 
             // SearchBox
             // 
-            this.textBoxSearch = new TextBox()
+            this.TextBoxSearch = new TextBox()
             {
                 BorderStyle = BorderStyle.FixedSingle,
                 Anchor = AnchorStyles.Left | AnchorStyles.Right,
@@ -41,18 +41,17 @@ namespace SwissTransportGUI.Views
                 PlaceholderText = "Search for a station ...",
                 TabIndex = 0,
             };
-
             //
             // AutoSuggestList
             //
-            this.listBoxSuggestions = new ListBox()
+            this.ListBoxSuggestions = new ListBox()
             {
                 Location = new Point()
                 {
-                    X = textBoxSearch.Location.X + 3,
-                    Y = textBoxSearch.Location.Y + textBoxSearch.Height + 2,
+                    X = TextBoxSearch.Location.X + 3,
+                    Y = TextBoxSearch.Location.Y + TextBoxSearch.Height + 2,
                 },
-                Width = textBoxSearch.Width,
+                Width = TextBoxSearch.Width,
                 Visible = false,
                 DataSource = StationSearcher.StationSuggestions,
                 ValueMember = "Id",
@@ -63,60 +62,60 @@ namespace SwissTransportGUI.Views
                 Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point),
             };
 
-            this.textBoxSearch.TextChanged += new EventHandler(this.SearchBox_TextChanged);
-            this.textBoxSearch.GotFocus += new EventHandler(this.ShowAutoSuggestions);
-            this.textBoxSearch.Click += new EventHandler(this.ShowAutoSuggestions);
-            this.textBoxSearch.Resize += new EventHandler(this.SearchBox_Resize);
-            this.textBoxSearch.KeyDown += new KeyEventHandler(this.SearchBox_HandleKey);
-            this.listBoxSuggestions.Click += new EventHandler(this.AutoSuggest_SuggestItem);
+            this.TextBoxSearch.TextChanged += new EventHandler(this.SearchBoxTextChanged);
+            this.TextBoxSearch.GotFocus += new EventHandler(this.ShowAutoSuggestions);
+            this.TextBoxSearch.Click += new EventHandler(this.ShowAutoSuggestions);
+            this.TextBoxSearch.Resize += new EventHandler(this.SearchBoxResize);
+            this.TextBoxSearch.KeyDown += new KeyEventHandler(this.SearchBoxHandleKey);
+            this.ListBoxSuggestions.Click += new EventHandler(this.AutoSuggestSuggestItem);
         }
 
-        private void SearchBox_HandleKey(object? sender, KeyEventArgs e)
+        private void SearchBoxHandleKey(object? sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                AutoSuggest_SuggestItem(new object(), new EventArgs());
+                AutoSuggestSuggestItem(new object(), new EventArgs());
                 e.Handled = true;
             }
         }
 
-        private void SearchBox_Resize(object? sender, EventArgs e)
+        private void SearchBoxResize(object? sender, EventArgs e)
         {
-            textBoxSearch.Width = textBoxSearch.Width;
-            textBoxSearch.Location = new Point()
+            TextBoxSearch.Width = TextBoxSearch.Width;
+            TextBoxSearch.Location = new Point()
             {
-                X = textBoxSearch.Location.X + 3,
-                Y = textBoxSearch.Location.Y + textBoxSearch.Height + 2,
+                X = TextBoxSearch.Location.X + 3,
+                Y = TextBoxSearch.Location.Y + TextBoxSearch.Height + 2,
             };
         }
 
-        private void AutoSuggest_SuggestItem(object? sender, EventArgs e)
+        private void AutoSuggestSuggestItem(object? sender, EventArgs e)
         {
-            Station selectedStation = (Station)listBoxSuggestions.SelectedItem;
-            textBoxSearch.Text = selectedStation.Name;
-            listBoxSuggestions.Hide();
+            Station selectedStation = (Station)ListBoxSuggestions.SelectedItem;
+            TextBoxSearch.Text = selectedStation.Name;
+            ListBoxSuggestions.Hide();
         }
 
-        private void SearchBox_TextChanged(object sender, EventArgs e)
+        private void SearchBoxTextChanged(object sender, EventArgs e)
         {
-            string stationNameQuery = textBoxSearch.Text;
+            string stationNameQuery = TextBoxSearch.Text;
             if (RegexController.IsValidSearchQuery(stationNameQuery) == true)
             {
                 StationSearcher.GetNewStationSuggestions(stationNameQuery);
                 SelectedStation = StationSearcher.StationSuggestions[0];
-                listBoxSuggestions.Show();
-                listBoxSuggestions.BringToFront();
+                ListBoxSuggestions.Show();
+                ListBoxSuggestions.BringToFront();
             }
 
             if (stationNameQuery.Length < 1)
             {
-                listBoxSuggestions.Hide();
+                ListBoxSuggestions.Hide();
             }
         }
 
         private void ShowAutoSuggestions(object sender, EventArgs e)
         {
-            listBoxSuggestions.Show();
+            ListBoxSuggestions.Show();
         }
 
     }

@@ -69,6 +69,6 @@
 
         #endregion
         private TabControl tabControlNavigation;
-        private DateTimePicker dateTimePicker;
+        private DateTimePicker DateTimePicker;
     }
 }

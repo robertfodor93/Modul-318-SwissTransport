@@ -13,25 +13,23 @@ namespace SwissTransportGUI.Views
 {
     public partial class SwissTransport : Form
     {
-        private ConnectionsTableView ConnectionsTableView { get; set; }
+        private ConnectionsView ConnectionsView { get; set; }
         private StationBoardView StationBoardView { get; set; }
         private MapView MapView { get; set; }
         public SwissTransport()
         {
             InitializeComponent();
 
-            ConnectionsTableView = new ConnectionsTableView();
+            ConnectionsView = new ConnectionsView();
             StationBoardView = new StationBoardView();
             MapView = new MapView();
 
             tabControlNavigation.TabPages.AddRange(new TabPage[] {
-            ConnectionsTableView.ConnectionsTab,
+            ConnectionsView.ConnectionsTab,
             StationBoardView.StationBoardTab,
             MapView.MapTab
 
         });
-
-            //AllocConsole();
         }
 
         private void CheckInternetconnection()

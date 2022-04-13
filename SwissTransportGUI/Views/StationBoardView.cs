@@ -14,6 +14,8 @@ namespace SwissTransportGUI.Views
         public TabPage StationBoardTab { get; set; } = new();
         private SplitContainer SplitContainerStationBoard { get; set; } = new();
         private TableLayoutPanel TableLayoutPanelStationSearch { get; set; } = new();
+        private Label LabelStation { get; set; } = new();
+        private SearchUserControl SearchStation { get; set; } = new(0, 0);
         private Button ButtonSearchStation { get; set; } = new();
         private DataGridView DataGridViewStationTable { get; set; } = new();
         private DataGridViewTextBoxColumn DataGridViewColumnLine { get; set; } = new();
@@ -21,8 +23,6 @@ namespace SwissTransportGUI.Views
         private DataGridViewTextBoxColumn DataGridViewColumnDirection { get; set; } = new();
         private DataGridViewTextBoxColumn DataGridViewColumnPlatform { get; set; } = new();
         private DataGridViewTextBoxColumn DataGridViewColumnDelays { get; set; } = new();
-        private Label LabelStation { get; set; } = new();
-        private SearchElement SearchStation { get; set; } = new(0, 0);
         private StationBoardController StationBoardController { get; }
 
         public StationBoardView()
@@ -35,9 +35,6 @@ namespace SwissTransportGUI.Views
         private void InitControls()
         {
             Font searchBoxFont = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            // 
-            // StationTableTab
-            // 
             this.StationBoardTab = new TabPage()
             {
                 BackColor = Color.White,
@@ -48,9 +45,7 @@ namespace SwissTransportGUI.Views
                 TabIndex = 2,
                 Text = "Fahrplan",
             };
-            // 
-            // TimeTableSplitContainer
-            // 
+            // Station board split container
             this.SplitContainerStationBoard = new SplitContainer()
             {
                 Cursor = Cursors.Default,
@@ -70,9 +65,7 @@ namespace SwissTransportGUI.Views
                 SplitterWidth = 3,
                 TabIndex = 0,
             };
-            // 
-            // SearchBoxSplitContainer
-            // 
+            // Table for the search bar
             this.TableLayoutPanelStationSearch = new TableLayoutPanel()
             {
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Top,
@@ -95,13 +88,9 @@ namespace SwissTransportGUI.Views
                 Text = "Station:",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
-            /// StationSearch element
-            this.SearchStation = new SearchElement(88, 43);
+            this.SearchStation = new SearchUserControl(88, 43);
             this.SearchStation.TextBoxSearch.Margin = new Padding(0);
             this.SearchStation.TextBoxSearch.Font = searchBoxFont;
-            // 
-            // SearchButton
-            // 
             this.ButtonSearchStation = new Button()
             {
                 Cursor = Cursors.Hand,
@@ -114,9 +103,7 @@ namespace SwissTransportGUI.Views
                 Text = "Suchen",
                 UseVisualStyleBackColor = false,
             };
-            // 
-            // Station table columns
-            // 
+            // Data table for station board
             this.DataGridViewStationTable = new DataGridView()
             {
                 AllowUserToAddRows = false,
@@ -132,7 +119,7 @@ namespace SwissTransportGUI.Views
                 Margin = new Padding(3, 2, 3, 2),
                 Name = "dataGridViewStationTable",
                 ReadOnly = true,
-                RowHeadersVisible = false, // weird first column
+                RowHeadersVisible = false,
                 RowHeadersWidth = 51,
                 RowTemplate = {
                     Height = 29
@@ -143,7 +130,6 @@ namespace SwissTransportGUI.Views
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
                 TabIndex = 0,
                 DataSource = StationBoardController.DepartureBoardItems,
-
             };
             this.DataGridViewColumnLine = new DataGridViewTextBoxColumn()
             {
@@ -181,10 +167,9 @@ namespace SwissTransportGUI.Views
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
                 Width = 100,
             };
-
+            //Adding controls to elements
             this.StationBoardTab.Controls.Add(this.SplitContainerStationBoard);
             this.SplitContainerStationBoard.Panel1.Controls.Add(this.TableLayoutPanelStationSearch);
-            this.SplitContainerStationBoard.Panel2.Controls.Add(this.DataGridViewStationTable);
             this.TableLayoutPanelStationSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
             this.TableLayoutPanelStationSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
             this.TableLayoutPanelStationSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
@@ -195,6 +180,7 @@ namespace SwissTransportGUI.Views
             this.TableLayoutPanelStationSearch.Controls.Add(this.SearchStation.TextBoxSearch, 1, 1);
             this.TableLayoutPanelStationSearch.Controls.Add(this.ButtonSearchStation, 2, 1);
             this.StationBoardTab.Controls.Add(this.SearchStation.ListBoxSuggestions);
+            this.SplitContainerStationBoard.Panel2.Controls.Add(this.DataGridViewStationTable);
             this.DataGridViewStationTable.Columns.AddRange(new DataGridViewColumn[] {
                 this.DataGridViewColumnLine,
                 this.DataGridViewColumnDeparture,
@@ -202,13 +188,13 @@ namespace SwissTransportGUI.Views
                 this.DataGridViewColumnPlatform,
                 this.DataGridViewColumnDelays,
             });
-
+            //Event handlers
             this.StationBoardTab.Paint += new PaintEventHandler(this.StationTableTabPaint);
             this.ButtonSearchStation.Click += new System.EventHandler(this.ButtonSearchStationClick);
             this.SearchStation.ListBoxSuggestions.Click += new EventHandler(this.AutoSuggestClick);
             this.SearchStation.TextBoxSearch.TextChanged += new EventHandler(this.CheckInput);
         }
-
+        //Event logic
         private void CheckInput(object? sender, EventArgs e)
         {
             if (RegexController.IsValidSearchQuery(this.SearchStation.TextBoxSearch.Text) == true)
@@ -220,12 +206,10 @@ namespace SwissTransportGUI.Views
                 this.ButtonSearchStation.Enabled = false;
             }
         }
-
         private void AutoSuggestClick(object? sender, EventArgs e)
         {
             ButtonSearchStationClick(new object(), new EventArgs());
         }
-
         private void ButtonSearchStationClick(object sender, EventArgs e)
         {
             try
@@ -247,7 +231,6 @@ namespace SwissTransportGUI.Views
             }
 
         }
-
         private void StationTableTabPaint(object sender, PaintEventArgs e)
         {
             this.SearchStation.TextBoxSearch.Focus();

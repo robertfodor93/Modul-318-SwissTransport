@@ -69,7 +69,7 @@
                 throw new ArgumentOutOfRangeException(nameof(latitude));
             }
 
-            var uri = new Uri($"{SearchApiHost}completion.json?latlon={latitude.ToString("G", CultureInfo.InvariantCulture)},{longitude.ToString("G", CultureInfo.InvariantCulture)}&show_coordinates=1&accuracy=50");
+            var uri = new Uri($"{SearchApiHost}completion.json?latlon={latitude.ToString("G", CultureInfo.InvariantCulture)},{longitude.ToString("G", CultureInfo.InvariantCulture)}&show_coordinates=1&accuracy=500");
 
             List<SearchCHLocations> stationList = this.GetObject<List<SearchCHLocations>>(uri);
             List<Station> resultStations = new List<Station>();
@@ -95,7 +95,6 @@
             {
                 StationList = resultStations,
             };
-
             return result;
         }
         public void Dispose()

@@ -13,7 +13,7 @@ namespace SwissTransportGUI.Controllers
     public class SearchConnectionController
     {
         private ITransport Transport { get; set; }
-        private static readonly int _displayLimit = 4;
+        private static readonly int displayLimit = 4;
 
         public BindingList<ConnectionsModel> Connections { get; set; }
 
@@ -27,7 +27,7 @@ namespace SwissTransportGUI.Controllers
         public void GetConnections(string fromStation, string toStation, DateTime departureDate, DateTime departureTime)
         {
             Connections.Clear();
-            Connections connections = Transport.GetConnections(fromStation, toStation, _displayLimit, departureDate, departureTime);
+            Connections connections = Transport.GetConnections(fromStation, toStation, displayLimit, departureDate, departureTime);
             foreach (Connection connection in connections.ConnectionList)
             {
                 Connections.Add(new ConnectionsModel()

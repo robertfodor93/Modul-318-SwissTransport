@@ -14,10 +14,10 @@ namespace SwissTransportGUI.Views
         private readonly string InitialMapLocation = "Luzern, Schweiz";
 
         public TabPage MapTab { get; set; } = new();
-        private Button ButtonSearchLocation { get; set; } = new();
         private TableLayoutPanel TableLayoutPanelLocationSearch { get; set; } = new();
         private Label LabelLocation { get; set; } = new();
-        private SearchElement SearchLocation { get; set; } = new(0, 0);
+        private SearchUserControl SearchLocation { get; set; } = new(0, 0);
+        private Button ButtonSearchLocation { get; set; } = new();
         private GMapControl MapControl { get; set; } = new();
         private GMapOverlay MapMarkers { get; set; } = new();
 
@@ -32,10 +32,8 @@ namespace SwissTransportGUI.Views
 
         private void InitControls()
         {
-            Font searchBoxFont = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            // 
+            Font searchBoxFont = new ("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             // StationTableTab
-            // 
             this.MapTab = new TabPage()
             {
                 BackColor = Color.White,
@@ -46,10 +44,7 @@ namespace SwissTransportGUI.Views
                 TabIndex = 2,
                 Text = "Kartenansicht",
             };
-
-            // 
-            // SearchBoxSplitContainer
-            // 
+            // Table for the search bar
             this.TableLayoutPanelLocationSearch = new TableLayoutPanel()
             {
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Top,
@@ -62,6 +57,7 @@ namespace SwissTransportGUI.Views
                 RowCount = 3,
                 TabIndex = 0,
             };
+            // Search section controls
             this.LabelLocation = new Label()
             {
                 Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Right))),
@@ -73,15 +69,10 @@ namespace SwissTransportGUI.Views
                 Text = "Station:",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
-            /// StationSearch Component
-            this.SearchLocation = new SearchElement(88, 43);
+            this.SearchLocation = new SearchUserControl(88, 43);
             this.SearchLocation.TextBoxSearch.Dock = DockStyle.Fill;
             this.SearchLocation.TextBoxSearch.Margin = new Padding(5);
             this.SearchLocation.TextBoxSearch.Font = searchBoxFont;
-
-            // 
-            // SearchButton
-            // 
             this.ButtonSearchLocation = new Button()
             {
                 Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Right))),
@@ -95,10 +86,7 @@ namespace SwissTransportGUI.Views
                 Text = "Suchen",
                 UseVisualStyleBackColor = false,
             };
-
-            //
-            // GMap Map
-            //
+            // Map
             this.MapControl = new GMapControl()
             {
                 Dock = DockStyle.Fill,
@@ -107,19 +95,13 @@ namespace SwissTransportGUI.Views
                 Zoom = 13,
                 ShowCenter = false,
             };
-
-            // 
-            // Gmap Markers Overlay
-            //
+            // Map markers
             this.MapMarkers = new GMapOverlay("markers");
-
             this.MapControl.MapProvider = OpenStreetMapProvider.Instance;
             GMaps.Instance.Mode = AccessMode.ServerOnly;
             this.MapControl.SetPositionByKeywords(this.InitialMapLocation);
             this.MapControl.Overlays.Add(MapMarkers);
-
-
-            // Adding to containers
+            // Adding controls to containers
             this.TableLayoutPanelLocationSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
             this.TableLayoutPanelLocationSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
             this.TableLayoutPanelLocationSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
@@ -132,21 +114,19 @@ namespace SwissTransportGUI.Views
             this.MapTab.Controls.Add(this.MapControl);
             this.MapTab.Controls.Add(this.TableLayoutPanelLocationSearch);
             this.MapTab.Controls.Add(this.SearchLocation.ListBoxSuggestions);
-
-            // Event Handling
-            this.MapTab.Paint += new PaintEventHandler(this.StationsNearbyTab_Paint);
-            this.SearchLocation.ListBoxSuggestions.Click += new EventHandler(this.AutoSuggest_Click);
+            // Event handlers
+            this.MapTab.Paint += new PaintEventHandler(this.StationsNearbyTabPaint);
+            this.SearchLocation.ListBoxSuggestions.Click += new EventHandler(this.AutoSuggestClick);
             this.SearchLocation.TextBoxSearch.TextChanged += new EventHandler(this.CheckInput);
-            this.ButtonSearchLocation.Click += new EventHandler(this.SearchButton_Click);
+            this.ButtonSearchLocation.Click += new EventHandler(this.SearchButtonClick);
 
         }
-
-        private void StationsNearbyTab_Paint(object? sender, PaintEventArgs e)
+        // Event logic
+        private void StationsNearbyTabPaint(object? sender, PaintEventArgs e)
         {
             this.SearchLocation.TextBoxSearch.Focus();
         }
-
-        private void SearchButton_Click(object? sender, EventArgs e)
+        private void SearchButtonClick(object? sender, EventArgs e)
         {
             try
             {
@@ -169,7 +149,6 @@ namespace SwissTransportGUI.Views
                 MessageBox.Show($"Failed to find station. Error occurred: {ex.Message}");
             }
         }
-
         private void AddMapMarkers(Stations nearbyStations, PointLatLng currentLocation)
         {
             foreach (Station station in nearbyStations.StationList)
@@ -190,7 +169,6 @@ namespace SwissTransportGUI.Views
                     Console.WriteLine($"Marker {station.Name} X {newMarkerLocation.Lat} Y {newMarkerLocation.Lng}");
                 }
             }
-
             MapMarkers.Markers.Add(new GMarkerGoogle(currentLocation, GMarkerGoogleType.blue_dot));
         }
 
@@ -206,9 +184,9 @@ namespace SwissTransportGUI.Views
             }
         }
 
-        private void AutoSuggest_Click(object? sender, EventArgs e)
+        private void AutoSuggestClick(object? sender, EventArgs e)
         {
-            SearchButton_Click(new object(), new EventArgs());
+            SearchButtonClick(new object(), new EventArgs());
         }
     }
 }

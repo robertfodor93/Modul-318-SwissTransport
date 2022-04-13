@@ -24,18 +24,12 @@
         {
             this.tabControlNavigation = new System.Windows.Forms.TabControl();
             this.SuspendLayout();
-            // 
-            // TabControl
-            // 
             this.tabControlNavigation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlNavigation.Location = new System.Drawing.Point(0, 0);
             this.tabControlNavigation.Name = "tabControlNavigation";
             this.tabControlNavigation.SelectedIndex = 0;
             this.tabControlNavigation.Size = new System.Drawing.Size(906, 611);
             this.tabControlNavigation.TabIndex = 0;
-            // 
-            // MainWindow
-            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 611);
@@ -59,7 +53,6 @@
             this.ResumeLayout(false);
 
         }
-
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -69,6 +62,5 @@
 
         #endregion
         private TabControl tabControlNavigation;
-        private DateTimePicker DateTimePicker;
     }
 }

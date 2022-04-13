@@ -12,12 +12,12 @@ namespace SwissTransportGUI.Controllers
 {
     public class StationBoardController
     {
-        public BindingList<StationBoardModel> DepartureBoardItems { get; set; }
+        public BindingList<StationBoardModel> StationBoardItems { get; set; }
         private ITransport Transport { get; set; }
 
         public StationBoardController()
         {
-            DepartureBoardItems = new BindingList<StationBoardModel>();
+            StationBoardItems = new BindingList<StationBoardModel>();
 
             Transport = new Transport();
         }
@@ -30,13 +30,12 @@ namespace SwissTransportGUI.Controllers
 
         public void GetStationBoard(string stationName, string stationId)
         {
-            // TODO: Error handling, when id null etc.
             StationBoardRoot stationBoardRoot = Transport.GetStationBoard(stationName, stationId);
 
-            DepartureBoardItems.Clear();
+            StationBoardItems.Clear();
             foreach (StationBoard item in stationBoardRoot.Entries)
             {
-                DepartureBoardItems.Add(new StationBoardModel()
+                StationBoardItems.Add(new StationBoardModel()
                 {
                     Line = $"{item.Category}{item.Number}",
                     DepartureTime = item.Stop.Departure.ToString("HH:mm"),

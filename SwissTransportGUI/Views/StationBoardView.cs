@@ -129,7 +129,7 @@ namespace SwissTransportGUI.Views
                 Size = new Size(686, 215),
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
                 TabIndex = 0,
-                DataSource = StationBoardController.DepartureBoardItems,
+                DataSource = StationBoardController.StationBoardItems,
             };
             this.DataGridViewColumnLine = new DataGridViewTextBoxColumn()
             {

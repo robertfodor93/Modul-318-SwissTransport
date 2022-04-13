@@ -14,17 +14,21 @@ namespace SwissTransportGUI.Views
     public partial class SwissTransport : Form
     {
         private ConnectionsTableView ConnectionsTableView { get; set; }
-        private StationTableView StationTableView { get; set; }
+        private StationBoardView StationBoardView { get; set; }
+        private MapView MapView { get; set; }
         public SwissTransport()
         {
             InitializeComponent();
 
             ConnectionsTableView = new ConnectionsTableView();
-            StationTableView = new StationTableView();
+            StationBoardView = new StationBoardView();
+            MapView = new MapView();
 
             tabControlNavigation.TabPages.AddRange(new TabPage[] {
             ConnectionsTableView.ConnectionsTab,
-            StationTableView.StationBoardTab
+            StationBoardView.StationBoardTab,
+            MapView.MapTab
+
         });
 
             //AllocConsole();

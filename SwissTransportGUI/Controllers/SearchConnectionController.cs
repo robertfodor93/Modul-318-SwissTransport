@@ -15,12 +15,12 @@ namespace SwissTransportGUI.Controllers
         private ITransport Transport { get; set; }
         private static readonly int _displayLimit = 4;
 
-        public BindingList<ConnectionModel> Connections { get; set; }
+        public BindingList<ConnectionsModel> Connections { get; set; }
 
         public SearchConnectionController()
         {
             Transport = new Transport();
-            Connections = new BindingList<ConnectionModel>();
+            Connections = new BindingList<ConnectionsModel>();
         }
         public void GetConnections(string fromStation, string toStation)
             => GetConnections(fromStation, toStation, DateTime.Now, DateTime.Now);
@@ -30,7 +30,7 @@ namespace SwissTransportGUI.Controllers
             Connections connections = Transport.GetConnections(fromStation, toStation, _displayLimit, departureDate, departureTime);
             foreach (Connection connection in connections.ConnectionList)
             {
-                Connections.Add(new ConnectionModel()
+                Connections.Add(new ConnectionsModel()
                 {
                     FromStation = connection.From.Station.Name,
                     ToStation = $"{connection.To.Station.Name}",

@@ -9,12 +9,12 @@ using SwissTransport.Models;
 
 namespace SwissTransportGUI.Controllers
 {
-    public class SearchStationController
+    public class SuggestionController
     {
         private ITransport Transport { get; set; }
         public BindingList<Station> StationSuggestions { get; internal set; }
 
-        public SearchStationController()
+        public SuggestionController()
         {
             Transport = new Transport();
 

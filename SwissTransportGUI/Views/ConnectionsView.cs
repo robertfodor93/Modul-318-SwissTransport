@@ -15,11 +15,11 @@ namespace SwissTransportGUI.Views
     {
         public TabPage ConnectionsTab { get; set; } = new();
         private SplitContainer SplitContainerConnections { get; set; } = new();
-        private TableLayoutPanel TableLayoutPanelConnections { get; set; } = new();
+        private TableLayoutPanel TableLayoutPanelSearchElement { get; set; } = new();
         private Label LabelTo { get; set; } = new();
-        private SearchStationComponent TextBoxTo { get; set; } = new(0, 0);
+        private SearchElement SearchTo { get; set; } = new(0, 0);
         private Label LabelFrom { get; set; } = new();
-        private SearchStationComponent TextBoxFrom { get; set; } = new(0, 0);
+        private SearchElement SearchFrom { get; set; } = new(0, 0);
         private DataGridView DataGridViewConnections { get; set; } = new();
         private DataGridViewTextBoxColumn DataGridViewColumnFrom { get; set; } = new();
         private DataGridViewTextBoxColumn DataGridViewColumnDepartureTime { get; set; } = new();
@@ -31,11 +31,11 @@ namespace SwissTransportGUI.Views
         private DateTimePicker DatePicker { get; set; } = new();
         private Label LabelTime { get; set; } = new();
         private DateTimePicker TimePicker { get; set; } = new();
-        private Button SearchButton { get; set; } = new();
+        private Button ButtonSearchConnections { get; set; } = new();
         private SearchConnectionController ConnectionController { get; set; }
         private bool DatePickerFilledOut { get; set; } = false;
         private bool TimePickerFilledOut { get; set; } = false;
-        private ConnectionModel SelectedConnection { get; set; } = new();
+        private ConnectionsModel SelectedConnection { get; set; } = new();
         
         public ConnectionsTableView()
         {
@@ -91,14 +91,14 @@ namespace SwissTransportGUI.Views
             // 
             // tableLayoutPanelConnections
             // 
-            this.TableLayoutPanelConnections = new TableLayoutPanel()
+            this.TableLayoutPanelSearchElement = new TableLayoutPanel()
             {
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Top,
                 Dock = DockStyle.Fill,
                 ColumnCount = 5,
                 Location = new Point(0, 0),
                 Margin = new Padding(3, 2, 3, 2),
-                Name = "tableLayoutPanelConnections",
+                Name = "tableLayoutPanelSearchElement",
                 RowCount = 3,
                 //Size = new Size(681, 85),
                 TabIndex = 0,
@@ -120,15 +120,15 @@ namespace SwissTransportGUI.Views
             // 
             // textBoxTo
             // 
-            this.TextBoxTo = new SearchStationComponent(427, 0);
-            this.TextBoxTo.TextBoxSearch.Margin = new Padding(0);
-            this.TextBoxTo.TextBoxSearch.Font = searchBoxFont;
+            this.SearchTo = new SearchElement(436, 0);
+            this.SearchTo.TextBoxSearch.Margin = new Padding(0);
+            this.SearchTo.TextBoxSearch.Font = searchBoxFont;
             // 
             // textBoxFrom
             // 
-            this.TextBoxFrom = new SearchStationComponent(116, 2);
-            this.TextBoxFrom.TextBoxSearch.Margin = new Padding(0);
-            this.TextBoxFrom.TextBoxSearch.Font = searchBoxFont;
+            this.SearchFrom = new SearchElement(88, 0);
+            this.SearchFrom.TextBoxSearch.Margin = new Padding(0);
+            this.SearchFrom.TextBoxSearch.Font = searchBoxFont;
             // 
             // labelFrom
             // 
@@ -199,13 +199,13 @@ namespace SwissTransportGUI.Views
             // 
             // searchButton
             // 
-            this.SearchButton = new Button()
+            this.ButtonSearchConnections = new Button()
             {
                 Cursor = Cursors.Hand,
                 Dock = DockStyle.Fill,
                 Enabled = false,
                 Location = new Point(25, 25),
-                Name = "searchButton",
+                Name = "buttonSearchConnections",
                 Size = new Size(152, 38),
                 TabIndex = 0,
                 Text = "Suchen",
@@ -313,25 +313,25 @@ namespace SwissTransportGUI.Views
             // Nesting controls in containers
             //
             this.ConnectionsTab.Controls.Add(this.SplitContainerConnections);
-            this.SplitContainerConnections.Panel1.Controls.Add(this.TableLayoutPanelConnections);
+            this.SplitContainerConnections.Panel1.Controls.Add(this.TableLayoutPanelSearchElement);
             this.SplitContainerConnections.Panel2.Controls.Add(this.DataGridViewConnections);
-            this.TableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            this.TableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            this.TableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            this.TableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            this.TableLayoutPanelConnections.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-            this.TableLayoutPanelConnections.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
-            this.TableLayoutPanelConnections.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
-            this.TableLayoutPanelConnections.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
-            this.TableLayoutPanelConnections.Controls.Add(this.LabelFrom, 0, 0);
-            this.TableLayoutPanelConnections.Controls.Add(this.TextBoxFrom.TextBoxSearch, 1, 0);
-            this.TableLayoutPanelConnections.Controls.Add(this.LabelTo, 2, 0);
-            this.TableLayoutPanelConnections.Controls.Add(this.TextBoxTo.TextBoxSearch, 3, 0);
-            this.TableLayoutPanelConnections.Controls.Add(this.LabelDate, 0, 1);
-            this.TableLayoutPanelConnections.Controls.Add(this.DatePicker, 1, 1);
-            this.TableLayoutPanelConnections.Controls.Add(this.LabelTime, 2, 1);
-            this.TableLayoutPanelConnections.Controls.Add(this.TimePicker, 3, 1);
-            this.TableLayoutPanelConnections.Controls.Add(this.SearchButton, 4, 0);
+            this.TableLayoutPanelSearchElement.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            this.TableLayoutPanelSearchElement.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            this.TableLayoutPanelSearchElement.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            this.TableLayoutPanelSearchElement.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            this.TableLayoutPanelSearchElement.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            this.TableLayoutPanelSearchElement.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+            this.TableLayoutPanelSearchElement.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+            this.TableLayoutPanelSearchElement.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+            this.TableLayoutPanelSearchElement.Controls.Add(this.LabelFrom, 0, 0);
+            this.TableLayoutPanelSearchElement.Controls.Add(this.SearchFrom.TextBoxSearch, 1, 0);
+            this.TableLayoutPanelSearchElement.Controls.Add(this.LabelTo, 2, 0);
+            this.TableLayoutPanelSearchElement.Controls.Add(this.SearchTo.TextBoxSearch, 3, 0);
+            this.TableLayoutPanelSearchElement.Controls.Add(this.LabelDate, 0, 1);
+            this.TableLayoutPanelSearchElement.Controls.Add(this.DatePicker, 1, 1);
+            this.TableLayoutPanelSearchElement.Controls.Add(this.LabelTime, 2, 1);
+            this.TableLayoutPanelSearchElement.Controls.Add(this.TimePicker, 3, 1);
+            this.TableLayoutPanelSearchElement.Controls.Add(this.ButtonSearchConnections, 4, 0);
             this.DataGridViewConnections.Columns.AddRange(new DataGridViewColumn[] {
                 this.DataGridViewColumnFrom,
                 this.DataGridViewColumnTo,
@@ -340,15 +340,15 @@ namespace SwissTransportGUI.Views
                 this.DataGridViewColumnDuration,
                 this.DataGridViewColumnDelay,
             });
-            this.ConnectionsTab.Controls.Add(this.TextBoxFrom.ListBoxSuggestions);
-            this.ConnectionsTab.Controls.Add(this.TextBoxTo.ListBoxSuggestions);
+            this.ConnectionsTab.Controls.Add(this.SearchFrom.ListBoxSuggestions);
+            this.ConnectionsTab.Controls.Add(this.SearchTo.ListBoxSuggestions);
 
             // Event Handlers
-            this.SearchButton.Click += new EventHandler(this.SearchButtonClick);
-            this.TextBoxFrom.TextBoxSearch.TextChanged += new EventHandler(this.CheckFieldsCompletion);
-            this.TextBoxTo.TextBoxSearch.TextChanged += new EventHandler(this.CheckFieldsCompletion);
-            this.TextBoxTo.TextBoxSearch.GotFocus += new EventHandler(this.HideAllOtherAutoSuggestions);
-            this.TextBoxFrom.TextBoxSearch.GotFocus += new EventHandler(this.HideAllOtherAutoSuggestions);
+            this.ButtonSearchConnections.Click += new EventHandler(this.ButtonSearchConnectionsClick);
+            this.SearchFrom.TextBoxSearch.TextChanged += new EventHandler(this.CheckFieldsCompletion);
+            this.SearchTo.TextBoxSearch.TextChanged += new EventHandler(this.CheckFieldsCompletion);
+            this.SearchTo.TextBoxSearch.GotFocus += new EventHandler(this.HideAllOtherAutoSuggestions);
+            this.SearchFrom.TextBoxSearch.GotFocus += new EventHandler(this.HideAllOtherAutoSuggestions);
             this.DatePicker.ValueChanged += new EventHandler(this.DatePickerValueChange);
             this.TimePicker.ValueChanged += new EventHandler(this.TimePickerValueChange);
         }
@@ -357,11 +357,11 @@ namespace SwissTransportGUI.Views
         {
             TextBox s = (TextBox)sender;
 
-            List<SearchStationComponent> inputFields = new List<SearchStationComponent>();
-            inputFields.Add(TextBoxTo);
-            inputFields.Add(TextBoxFrom);
+            List<SearchElement> inputFields = new List<SearchElement>();
+            inputFields.Add(SearchTo);
+            inputFields.Add(SearchFrom);
 
-            foreach (SearchStationComponent field in inputFields)
+            foreach (SearchElement field in inputFields)
             {
                 if (nameof(field) != nameof(s.Parent))
                 {
@@ -383,28 +383,28 @@ namespace SwissTransportGUI.Views
         private void CheckFieldsCompletion(object? sender, EventArgs e)
         {
             // Enable Search Button, if from and to filled out
-            if (RegexController.IsValidSearchQuery(this.TextBoxFrom.TextBoxSearch.Text) == true
-                && RegexController.IsValidSearchQuery(this.TextBoxTo.TextBoxSearch.Text) == true)
+            if (RegexController.IsValidSearchQuery(this.SearchFrom.TextBoxSearch.Text) == true
+                && RegexController.IsValidSearchQuery(this.SearchTo.TextBoxSearch.Text) == true)
             {
-                this.SearchButton.Enabled = true;
+                this.ButtonSearchConnections.Enabled = true;
             }
             else
             {
-                this.SearchButton.Enabled = false;
+                this.ButtonSearchConnections.Enabled = false;
             }
         }
 
-        private void SearchButtonClick(object? sender, EventArgs e)
+        private void ButtonSearchConnectionsClick(object? sender, EventArgs e)
         {
             try
             {
-                if (this.TimePickerFilledOut && this.DatePickerFilledOut && RegexController.IsValidSearchQuery(this.TextBoxFrom.SelectedStation.Name) && RegexController.IsValidSearchQuery(this.TextBoxTo.SelectedStation.Name))
+                if (this.TimePickerFilledOut && this.DatePickerFilledOut && RegexController.IsValidSearchQuery(this.SearchFrom.SelectedStation.Name) && RegexController.IsValidSearchQuery(this.SearchTo.SelectedStation.Name))
                 {
-                    ConnectionController.GetConnections(TextBoxFrom.SelectedStation.Name, TextBoxTo.SelectedStation.Name, DatePicker.Value, TimePicker.Value);
+                    ConnectionController.GetConnections(SearchFrom.SelectedStation.Name, SearchTo.SelectedStation.Name, DatePicker.Value, TimePicker.Value);
                 }
-                else if (RegexController.IsValidSearchQuery(this.TextBoxFrom.SelectedStation.Name) && RegexController.IsValidSearchQuery(this.TextBoxTo.SelectedStation.Name))
+                else if (RegexController.IsValidSearchQuery(this.SearchFrom.SelectedStation.Name) && RegexController.IsValidSearchQuery(this.SearchTo.SelectedStation.Name))
                 {
-                    ConnectionController.GetConnections(TextBoxFrom.SelectedStation.Name, TextBoxTo.SelectedStation.Name);
+                    ConnectionController.GetConnections(SearchFrom.SelectedStation.Name, SearchTo.SelectedStation.Name);
                 }
             }
             catch (Exception ex)

@@ -9,23 +9,23 @@ using SwissTransportGUI.Views;
 
 namespace SwissTransportGUI.Views
 {
-    internal class StationTableView
+    internal class StationBoardView
     {
         public TabPage StationBoardTab { get; set; } = new();
         private SplitContainer SplitContainerStationBoard { get; set; } = new();
-        private SplitContainer SplitContainerStationSearchBox { get; set; } = new();
-        private Button ButtonStationSearch { get; set; } = new();
+        private TableLayoutPanel TableLayoutPanelStationSearch { get; set; } = new();
+        private Button ButtonSearchStation { get; set; } = new();
         private DataGridView DataGridViewStationTable { get; set; } = new();
         private DataGridViewTextBoxColumn DataGridViewColumnLine { get; set; } = new();
         private DataGridViewTextBoxColumn DataGridViewColumnDeparture { get; set; } = new();
         private DataGridViewTextBoxColumn DataGridViewColumnDirection { get; set; } = new();
         private DataGridViewTextBoxColumn DataGridViewColumnPlatform { get; set; } = new();
         private DataGridViewTextBoxColumn DataGridViewColumnDelays { get; set; } = new();
-        private SearchStationComponent SearchComponent { get; set; } = new(0, 0);
-
+        private Label LabelStation { get; set; } = new();
+        private SearchElement SearchStation { get; set; } = new(0, 0);
         private StationBoardController StationBoardController { get; }
 
-        public StationTableView()
+        public StationBoardView()
         {
             StationBoardController = new StationBoardController();
 
@@ -34,6 +34,7 @@ namespace SwissTransportGUI.Views
 
         private void InitControls()
         {
+            Font searchBoxFont = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             // 
             // StationTableTab
             // 
@@ -52,63 +53,66 @@ namespace SwissTransportGUI.Views
             // 
             this.SplitContainerStationBoard = new SplitContainer()
             {
-                Cursor = Cursors.HSplit,
+                Cursor = Cursors.Default,
                 Dock = DockStyle.Fill,
                 FixedPanel = FixedPanel.Panel1,
-                Location = new Point(3, 3),
+                IsSplitterFixed = true,
+                Location = new Point(3, 2),
+                Margin = new Padding(3, 2, 3, 2),
                 Name = "splitContainerStationBoard",
                 Orientation = Orientation.Horizontal,
-                Size = new Size(786, 411),
-                SplitterDistance = 88,
-                TabIndex = 1,
                 Panel1 =
                 {
-                    BackColor = Color.White,
+                    BackColor = Color.White
                 },
-                Panel2 =
-                {
-                    BackColor= Color.White,
-                }
+                Size = new Size(686, 306),
+                SplitterDistance = 125,
+                SplitterWidth = 3,
+                TabIndex = 0,
             };
             // 
             // SearchBoxSplitContainer
             // 
-            this.SplitContainerStationSearchBox = new SplitContainer()
+            this.TableLayoutPanelStationSearch = new TableLayoutPanel()
             {
-                Cursor = Cursors.VSplit,
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Top,
                 Dock = DockStyle.Fill,
+                ColumnCount = 3,
                 Location = new Point(0, 0),
-                Name = "searchBoxSplitContainer",
-                Size = new Size(786, 88),
-                FixedPanel = FixedPanel.Panel2, // Search Button always same size
-                SplitterDistance = 580,
+                Margin = new Padding(3, 2, 3, 2),
+                Name = "TableLayoutPanelStationSearch",
+                RowCount = 3,
                 TabIndex = 0,
-                Panel1 = {
-                    Padding = new Padding(25, 27, 0, 25),
-                },
-                Panel2 =
-                {
-                    Padding = new Padding(0, 26, 25, 31),
-                }
             };
-            /// StationSearch Component
-            this.SearchComponent = new SearchStationComponent(25, 27);
-            this.SearchComponent.TextBoxSearch.Dock = DockStyle.Fill;
+            this.LabelStation = new Label()
+            {
+                Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Right))),
+                AutoSize = true,
+                Location = new Point(75, 0),
+                Name = "labelStation",
+                Size = new Size(35, 42),
+                TabIndex = 4,
+                Text = "Station:",
+                TextAlign = ContentAlignment.MiddleCenter,
+            };
+            /// StationSearch element
+            this.SearchStation = new SearchElement(88, 43);
+            this.SearchStation.TextBoxSearch.Margin = new Padding(0);
+            this.SearchStation.TextBoxSearch.Font = searchBoxFont;
             // 
             // SearchButton
             // 
-            this.ButtonStationSearch = new Button()
+            this.ButtonSearchStation = new Button()
             {
                 Cursor = Cursors.Hand,
                 Dock = DockStyle.Fill,
                 Enabled = false,
-                Location = new Point(25, 25),
-                Name = "searchButton",
-                Size = new Size(152, 38),
+                Location = new Point(25, 0),
+                Name = "buttonSearchStation",
+                Size = new Size(152, 25),
                 TabIndex = 0,
                 Text = "Suchen",
                 UseVisualStyleBackColor = false,
-                ForeColor = Color.Blue
             };
             // 
             // Station table columns
@@ -178,6 +182,19 @@ namespace SwissTransportGUI.Views
                 Width = 100,
             };
 
+            this.StationBoardTab.Controls.Add(this.SplitContainerStationBoard);
+            this.SplitContainerStationBoard.Panel1.Controls.Add(this.TableLayoutPanelStationSearch);
+            this.SplitContainerStationBoard.Panel2.Controls.Add(this.DataGridViewStationTable);
+            this.TableLayoutPanelStationSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            this.TableLayoutPanelStationSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
+            this.TableLayoutPanelStationSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            this.TableLayoutPanelStationSearch.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+            this.TableLayoutPanelStationSearch.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+            this.TableLayoutPanelStationSearch.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+            this.TableLayoutPanelStationSearch.Controls.Add(this.LabelStation, 0, 1);
+            this.TableLayoutPanelStationSearch.Controls.Add(this.SearchStation.TextBoxSearch, 1, 1);
+            this.TableLayoutPanelStationSearch.Controls.Add(this.ButtonSearchStation, 2, 1);
+            this.StationBoardTab.Controls.Add(this.SearchStation.ListBoxSuggestions);
             this.DataGridViewStationTable.Columns.AddRange(new DataGridViewColumn[] {
                 this.DataGridViewColumnLine,
                 this.DataGridViewColumnDeparture,
@@ -185,49 +202,44 @@ namespace SwissTransportGUI.Views
                 this.DataGridViewColumnPlatform,
                 this.DataGridViewColumnDelays,
             });
-            this.StationBoardTab.Controls.Add(this.SplitContainerStationBoard);
-            this.SplitContainerStationBoard.Panel1.Controls.Add(this.SplitContainerStationSearchBox);
-            this.SplitContainerStationBoard.Panel2.Controls.Add(this.DataGridViewStationTable);
-            this.SplitContainerStationSearchBox.Panel1.Controls.Add(this.SearchComponent.TextBoxSearch);
-            this.SplitContainerStationSearchBox.Panel2.Controls.Add(this.ButtonStationSearch);
-            this.StationBoardTab.Controls.Add(this.SearchComponent.ListBoxSuggestions);
+
             this.StationBoardTab.Paint += new PaintEventHandler(this.StationTableTabPaint);
-            this.ButtonStationSearch.Click += new System.EventHandler(this.SearchButtonClick);
-            this.SearchComponent.ListBoxSuggestions.Click += new EventHandler(this.AutoSuggestClick);
-            this.SearchComponent.TextBoxSearch.TextChanged += new EventHandler(this.CheckInput);
+            this.ButtonSearchStation.Click += new System.EventHandler(this.ButtonSearchStationClick);
+            this.SearchStation.ListBoxSuggestions.Click += new EventHandler(this.AutoSuggestClick);
+            this.SearchStation.TextBoxSearch.TextChanged += new EventHandler(this.CheckInput);
         }
 
         private void CheckInput(object? sender, EventArgs e)
         {
-            if (RegexController.IsValidSearchQuery(this.SearchComponent.TextBoxSearch.Text) == true)
+            if (RegexController.IsValidSearchQuery(this.SearchStation.TextBoxSearch.Text) == true)
             {
-                this.ButtonStationSearch.Enabled = true;
+                this.ButtonSearchStation.Enabled = true;
             }
             else
             {
-                this.ButtonStationSearch.Enabled = false;
+                this.ButtonSearchStation.Enabled = false;
             }
         }
 
         private void AutoSuggestClick(object? sender, EventArgs e)
         {
-            SearchButtonClick(new object(), new EventArgs());
+            ButtonSearchStationClick(new object(), new EventArgs());
         }
 
-        private void SearchButtonClick(object sender, EventArgs e)
+        private void ButtonSearchStationClick(object sender, EventArgs e)
         {
             try
             {
-                string stationNameQuery = this.SearchComponent.TextBoxSearch.Text;
-                if (RegexController.IsValidSearchQuery(this.SearchComponent.SelectedStation.Name) == true)
+                string stationNameQuery = this.SearchStation.TextBoxSearch.Text;
+                if (RegexController.IsValidSearchQuery(this.SearchStation.SelectedStation.Name) == true)
                 {
-                    StationBoardController.GetStationBoard(this.SearchComponent.SelectedStation.Name, this.SearchComponent.SelectedStation.Id);
+                    StationBoardController.GetStationBoard(this.SearchStation.SelectedStation.Name, this.SearchStation.SelectedStation.Id);
                 }
                 else if (RegexController.IsValidSearchQuery(stationNameQuery) == true)
                 {
                     StationBoardController.GetStationBoard(stationNameQuery);
                 }
-                this.SearchComponent.ListBoxSuggestions.Hide();
+                this.SearchStation.ListBoxSuggestions.Hide();
             }
             catch (Exception ex)
             {
@@ -238,7 +250,7 @@ namespace SwissTransportGUI.Views
 
         private void StationTableTabPaint(object sender, PaintEventArgs e)
         {
-            this.SearchComponent.TextBoxSearch.Focus();
+            this.SearchStation.TextBoxSearch.Focus();
 
         }
     }

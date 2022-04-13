@@ -8,18 +8,18 @@ using SwissTransportGUI.Controllers;
 
 namespace SwissTransportGUI.Views
 {
-    internal class SearchStationComponent
+    internal class SearchElement
     {
         public TextBox TextBoxSearch { get; set; } = new();
         public ListBox ListBoxSuggestions { get; private set; } = new();
 
         public Station SelectedStation { get; private set; }
 
-        public SearchStationController StationSearcher { get; private set; }
+        public SuggestionController StationSearcher { get; private set; }
 
-        public SearchStationComponent(int SearchBoxX, int SearchBoxY)
+        public SearchElement(int SearchBoxX, int SearchBoxY)
         {
-            StationSearcher = new SearchStationController();
+            StationSearcher = new SuggestionController();
             SelectedStation = new Station();
 
             InitControls(SearchBoxX, SearchBoxY);
@@ -48,7 +48,7 @@ namespace SwissTransportGUI.Views
             {
                 Location = new Point()
                 {
-                    X = TextBoxSearch.Location.X + 3,
+                    X = TextBoxSearch.Location.X + 2,
                     Y = TextBoxSearch.Location.Y + TextBoxSearch.Height + 2,
                 },
                 Width = TextBoxSearch.Width,

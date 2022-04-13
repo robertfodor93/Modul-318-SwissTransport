@@ -10,8 +10,8 @@
 
     public class Transport : ITransport, IDisposable
     {
-        private const string WebApiHost = "https://transport.opendata.ch/v1/";
-
+        private const string OpenDataApiHost = "https://transport.opendata.ch/v1/";
+        private const string SearchApiHost = "https://timetable.search.ch/api/";
         private readonly HttpClient httpClient = new HttpClient();
 
         public Stations GetStations(string query)
@@ -21,7 +21,7 @@
                 throw new ArgumentNullException(nameof(query));
             }
 
-            var uri = new Uri($"{WebApiHost}locations?query={query}");
+            var uri = new Uri($"{OpenDataApiHost}locations?query={query}");
             return this.GetObject<Stations>(uri);
         }
 
@@ -37,7 +37,7 @@
                 throw new ArgumentNullException(nameof(id));
             }
 
-            var uri = new Uri($"{WebApiHost}stationboard?station={station}&id={id}");
+            var uri = new Uri($"{OpenDataApiHost}stationboard?station={station}&id={id}");
             return this.GetObject<StationBoardRoot>(uri);
         }
 
@@ -58,11 +58,46 @@
                 throw new ArgumentOutOfRangeException(nameof(connectionLimit));
             }
 
-            // TODO: check departure time
-            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}&limit={connectionLimit}&date={departureDate.ToString("yyyy-MM-dd")}&time={departureTime.ToString("HH:mm")}");
+            var uri = new Uri($"{OpenDataApiHost}connections?from={fromStation}&to={toStation}&limit={connectionLimit}&date={departureDate.ToString("yyyy-MM-dd")}&time={departureTime.ToString("HH:mm")}");
             return this.GetObject<Connections>(uri);
         }
 
+        public Stations GetStationLocation(double latitude, double longitude)
+        {
+            if (latitude <= 0 && longitude <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(latitude));
+            }
+
+            var uri = new Uri($"{SearchApiHost}completion.json?latlon={latitude.ToString("G", CultureInfo.InvariantCulture)},{longitude.ToString("G", CultureInfo.InvariantCulture)}&show_coordinates=1&accuracy=50");
+
+            List<SearchCHLocations> stationList = this.GetObject<List<SearchCHLocations>>(uri);
+            List<Station> resultStations = new List<Station>();
+
+            foreach (SearchCHLocations sta in stationList)
+            {
+                Station station = new Station()
+                {
+                    Id = sta.Name,
+                    Name = sta.Name,
+                    Distance = sta.Distance,
+                    Coordinate = new Coordinate()
+                    {
+                        Type = "coordinate",
+                        XCoordinate = sta.XCoordinate,
+                        YCoordinate = sta.YCoordinate,
+                    },
+                };
+                resultStations.Add(station);
+            }
+
+            Stations result = new Stations()
+            {
+                StationList = resultStations,
+            };
+
+            return result;
+        }
         public void Dispose()
         {
             this.httpClient?.Dispose();

@@ -136,4 +136,4 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 
 ![Installer](/images/step3.png)
 
-![Installer](/images/step4.png)
+![Installer](/images/Step4.png)

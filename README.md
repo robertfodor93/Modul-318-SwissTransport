@@ -26,6 +26,8 @@ In dem Projekt des Modules 318 geht es darum, eine Applikation zu entwickeln, we
 
 Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumentieren. Das Dokument enthält User Stories, Funktionalitäten, Mockups, Bug liste, Aktivitätsdiagramme, Testfälle, wie auch die Installationsanleitung.
 
+<a name="userstories"/>
+
 ### User Stories
 
 | ID   | Beschreibung  | Abnahmekrieterien| Priorität |
@@ -43,7 +45,6 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 <a name="funktionen"/>
 
 ## Funktionen
-
 
 | User Story | Priorität | Status | Details                      |
 | ----------- | --------- | ------ | --------------------------------- | 
@@ -79,6 +80,8 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 #### Kartenansicht
 
 ![Mockup](/images/Kartenansicht.png)
+
+<a name="tests"/>
 
 ## Tests
 
@@ -119,6 +122,16 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 
 ![Unittest](/images/Unittests.png)
 
-### Installationsanleitung
+<a name="installation"/>
 
-[Installer Herunterladen](https://github.com/robertfodor93/Modul-318-SwissTransport/blob/fb8dfe0a0f399fdc4d219bf35bab8ca684b5fc4a/installer/SwissTransportSetup.msi)
+## Installationsanleitung
+
+[Installer Herunterladen](https://github.com/robertfodor93/Modul-318-SwissTransport/raw/fb8dfe0a0f399fdc4d219bf35bab8ca684b5fc4a/installer/SwissTransportSetup.msi)
+
+![Installer](/images/step1.png)
+
+![Installer](/images/step2.png)
+
+![Installer](/images/step3.png)
+
+![Installer](/images/step4.png)

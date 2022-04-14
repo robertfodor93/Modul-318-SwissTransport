@@ -11,7 +11,14 @@ Modul 318 Projekt
 * [Tests](#tests)
 * [Installation Anleitung](#installation) 
 
+
+<br>
+<br>
+
 ## Modul 318 Projekt
+
+<br>
+<br>
 
 <a name="autor"/>
 
@@ -23,17 +30,26 @@ Erstelldatum: 12.02.2022
 
 Letzte version: 14.04.2022
 
+<br>
+<br>
+
 <a name="zussamenfassung"/>
 
 ### Zusammenfassung
 
 In dem Projekt des Modules 318 geht es darum, eine Applikation zu entwickeln, welche die Fahrpläne des öffentlichen Verkehrs anzeigt. Mit der Applikation soll es möglich seine Verbindungen zu suchen, wie auch die Fahrpläne einer Station.
 
+<br>
+<br>
+
 <a name="zweck"/>
 
 ### Zweck
 
 Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumentieren. Das Dokument enthält User Stories, Funktionalitäten, Mockups, Bug liste, Aktivitätsdiagramme, Testfälle, wie auch die Installationsanleitung.
+
+<br>
+<br>
 
 <a name="userstories"/>
 
@@ -51,6 +67,9 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 | M318-08 | Als Benutzer möchte ich über relevante Zugverbindungen per E-Mail benachrichtigt werden. | Der Benutzer erhält eine E-Mail mit seinen Verbindungen. | 3 |
 | M318-09 | Als Benutzer möchte ich gewählte Linien in eine Favoritenliste aufnehmen. | Der Benutzer kann gewählte Linien in eine Favoritenliste aufnehmen | 3 |
 
+<br>
+<br>
+
 <a name="funktionen"/>
 
 ## Funktionen
@@ -67,12 +86,18 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 | M318-08        | 3         | ❌     |  |
 | M318-09        | 3         | ❌     |  |
 
+<br>
+<br>
+
 <a name="activitydiagram"/>
 
 ### Aktivitäts Diagramm
 
 
 ![Aktiviäts Diagramm](/images/ActivityDiagramm.png)
+
+<br>
+<br>
 
 <a name="mockups"/>
 
@@ -89,6 +114,9 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 #### Kartenansicht
 
 ![Mockup](/images/Kartenansicht.png)
+
+<br>
+<br>
 
 <a name="tests"/>
 
@@ -131,6 +159,9 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 
 ![Unittest](/images/Unittests.png)
 
+<br>
+<br>
+
 <a name="installation"/>
 
 ## Installationsanleitung
@@ -145,20 +176,7 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 
 ![Installer](/images/step3.png)
 
-![Installer](/images/Step4.png)<br>
+![Installer](/images/Step4.png)
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 ![image](https://user-images.githubusercontent.com/81242605/163400520-6b1caa12-693f-4d7b-b007-49af4c89ad5c.png)

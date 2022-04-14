@@ -43,7 +43,8 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 <a name="funktionen"/>
 
 ## Funktionen
-In der Tabele ist ersichtlich welche Funktionen umgesetz wurden und welche nicht.
+
+
 | User Story | Priorität | Status | Details                      |
 | ----------- | --------- | ------ | --------------------------------- | 
 | M318-01       | 1         | ✅      | Die suche nach Verbindungen wurde erfolgreich implementiert. | 
@@ -59,8 +60,22 @@ In der Tabele ist ersichtlich welche Funktionen umgesetz wurden und welche nicht
 <a name="activitydiagram"/>
 
 ### Aktiviäts Diagramm
-Dieses Diagramm zeigt wie die Funktionen des Programm bedient werden.
+
 
 ![Aktiviäts Diagramm](/images/image.png)
 
----
+<a name="mockups"/>
+
+### Mockups
+
+#### Verbindungssuche
+
+![Mockup](/imgages/Mockup1.png)
+
+#### Fahrplan
+
+![Mockup](/imgages/Mockup1.png)
+
+#### Kartenansicht
+
+![Mockup](/imgages/Mockup1.png)

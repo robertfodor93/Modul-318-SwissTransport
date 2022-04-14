@@ -10,9 +10,11 @@
 
 ### Autor
 
-* Autor: Robert Fodor
-* Erstelldatum: 12.02.2022
-* Letzte version: 14.04.2022
+Autor: Robert Fodor
+
+Erstelldatum: 12.02.2022
+
+Letzte version: 14.04.2022
 
 <a name="zussamenfassung"/>
 

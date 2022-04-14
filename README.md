@@ -74,7 +74,7 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 
 #### Fahrplan
 
-![Mockup](/images/Abfahrtstafel.png.)
+![Mockup](/images/Abfahrtstafel.png)
 
 #### Kartenansicht
 

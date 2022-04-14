@@ -70,12 +70,12 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 
 #### Verbindungssuche
 
-![Mockup](/imgages/Mockup1.png)
+![Mockup](/imgages/Verbindungssuche.png)
 
 #### Fahrplan
 
-![Mockup](/imgages/Mockup1.png)
+![Mockup](/imgages/Abfahrtstafel.png)
 
 #### Kartenansicht
 
-![Mockup](/imgages/Mockup1.png)
+![Mockup](/imgages/Kartenansicht.png)

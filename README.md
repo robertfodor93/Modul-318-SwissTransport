@@ -29,7 +29,7 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 ### User Stories
 
 | ID   | Beschreibung  | Abnahmekrieterien| Priorität |
-| -----|:-------------:| -----:|-----:|
+| -------|:-------------:| -----:|-----:|
 | M318-01 | Als Benutzer möchte ich der Lage sein den Start und Endstationen zu wählen.| Der Benutzer bekommt die richtigen Verbindungen basierend auf den Start und Ziel Ort. | 1 |
 | M318-02 | Als Benutzer möchte ich das mir die nächsten 4 Verbindungen angezeigt werden bei der Auswahl einer Reiseroute. | Der Benutzer erhält nur die 4 nächsten Verbindungen basierend auf seiner Auswahl. | 1 |
 | M318-03 | Als Benutzer möchte ich den Standort der nächsten Station vom aktuellen Standort anzeigen lassen | Der Benutzer erhält die nächste Station auf einer Kartenansicht, basierend auf seiner Location. | 1 |
@@ -55,3 +55,12 @@ In der Tabele ist ersichtlich welche Funktionen umgesetz wurden und welche nicht
 | M318-07         | 3         | ✅      | Bei der Suche nach Standorten einer Station fokussiert das Kartenfenster auf den Standort der Station. |  
 | M318-08        | 3         | ❌     |  |
 | M318-09        | 3         | ❌     |  |
+
+<a name="activitydiagram"/>
+
+### Aktiviäts Diagramm
+Dieses Diagramm zeigt wie die Funktionen des Programm bedient werden.
+
+![Aktiviäts Diagramm](/)
+
+---

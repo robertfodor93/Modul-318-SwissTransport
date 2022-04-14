@@ -40,11 +40,7 @@
             this.Text = "Swiss Transport";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
-
             this.SuspendLayout();
-            // 
-            // SwissTransport
-            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);

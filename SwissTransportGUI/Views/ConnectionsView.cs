@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MimeKit;
-using SwissTransport.Models;
 using SwissTransportGUI.Controllers;
-using SwissTransportGUI.Views;
-using SwissTransportGUI.Models;
 
 namespace SwissTransportGUI.Views
 {
@@ -15,12 +11,11 @@ namespace SwissTransportGUI.Views
     {
         public TabPage ConnectionsTab { get; set; } = new();
         private SplitContainer SplitContainerConnections { get; set; } = new();
-        private TableLayoutPanel TableLayoutPanelSearchElement { get; set; } = new();
+        private TableLayoutPanel TableLayoutPanelSearchContainer { get; set; } = new();
         private Label LabelTo { get; set; } = new();
         private SearchUserControl SearchTo { get; set; } = new(0, 0);
         private Label LabelFrom { get; set; } = new();
         private SearchUserControl SearchFrom { get; set; } = new(0, 0);
-        private ConnectionsModel SelectedConnection { get; set; } = new();
         private Label LabelDate { get; set; } = new();
         private DateTimePicker DatePicker { get; set; } = new();
         private bool DatePickerFilledOut { get; set; } = false;
@@ -36,7 +31,7 @@ namespace SwissTransportGUI.Views
         private DataGridViewTextBoxColumn DataGridViewColumnDuration { get; set; } = new();
         private DataGridViewTextBoxColumn DataGridViewColumnDelay { get; set; } = new();
         private SearchConnectionController ConnectionController { get; set; }
-        
+
         public ConnectionsView()
         {
             ConnectionController = new SearchConnectionController();
@@ -78,10 +73,9 @@ namespace SwissTransportGUI.Views
                 Size = new Size(686, 306),
                 SplitterDistance = 125,
                 SplitterWidth = 3,
-                TabIndex = 0,
             };
             // Table for the search bar
-            this.TableLayoutPanelSearchElement = new TableLayoutPanel()
+            this.TableLayoutPanelSearchContainer = new TableLayoutPanel()
             {
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Top,
                 Dock = DockStyle.Fill,
@@ -90,7 +84,6 @@ namespace SwissTransportGUI.Views
                 Margin = new Padding(3, 2, 3, 2),
                 Name = "tableLayoutPanelSearchElement",
                 RowCount = 3,
-                TabIndex = 0,
             };
             this.LabelTo = new Label()
             {
@@ -99,7 +92,6 @@ namespace SwissTransportGUI.Views
                 Location = new Point(427, 0),
                 Name = "labelTo",
                 Size = new Size(19, 43),
-                TabIndex = 5,
                 Text = "Nach:",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
@@ -113,7 +105,6 @@ namespace SwissTransportGUI.Views
                 Location = new Point(75, 0),
                 Name = "labelFrom",
                 Size = new Size(35, 42),
-                TabIndex = 4,
                 Text = "Von:",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
@@ -127,7 +118,6 @@ namespace SwissTransportGUI.Views
                 Location = new Point(91, 42),
                 Name = "labelDate",
                 Size = new Size(23, 42),
-                TabIndex = 1,
                 Text = "Datum:",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
@@ -135,6 +125,7 @@ namespace SwissTransportGUI.Views
             {
                 Format = DateTimePickerFormat.Short,
                 Location = new Point(116, 44),
+                Name = "datePicker",
                 MaxDate = DateTime.Today.AddDays(14), // in 2 Weeks
                 MinDate = DateTime.Today,
                 Value = DateTime.Today,
@@ -147,7 +138,6 @@ namespace SwissTransportGUI.Views
                 Location = new Point(427, 0),
                 Name = "labelTime",
                 Size = new Size(23, 42),
-                TabIndex = 1,
                 Text = "Uhrzeit:",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
@@ -195,7 +185,7 @@ namespace SwissTransportGUI.Views
                 RowTemplate = { Height = 29, },
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
                 Size = new Size(686, 214),
-                TabIndex = 0,
+                TabIndex = 1,
             };
             this.DataGridViewColumnFrom = new DataGridViewTextBoxColumn()
             {
@@ -242,9 +232,6 @@ namespace SwissTransportGUI.Views
                 ReadOnly = true,
                 DisplayIndex = 4,
             };
-            // 
-            // dataGridViewColumnDelay
-            // 
             this.DataGridViewColumnDelay = new DataGridViewTextBoxColumn()
             {
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
@@ -255,27 +242,27 @@ namespace SwissTransportGUI.Views
                 DisplayIndex = 5,
             };
             //
-            // Nesting controls in containers
+            // Attaching controls in containers
             //
             this.ConnectionsTab.Controls.Add(this.SplitContainerConnections);
-            this.SplitContainerConnections.Panel1.Controls.Add(this.TableLayoutPanelSearchElement);
-            this.TableLayoutPanelSearchElement.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            this.TableLayoutPanelSearchElement.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            this.TableLayoutPanelSearchElement.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            this.TableLayoutPanelSearchElement.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-            this.TableLayoutPanelSearchElement.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-            this.TableLayoutPanelSearchElement.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
-            this.TableLayoutPanelSearchElement.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
-            this.TableLayoutPanelSearchElement.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
-            this.TableLayoutPanelSearchElement.Controls.Add(this.LabelFrom, 0, 0);
-            this.TableLayoutPanelSearchElement.Controls.Add(this.SearchFrom.TextBoxSearch, 1, 0);
-            this.TableLayoutPanelSearchElement.Controls.Add(this.LabelTo, 2, 0);
-            this.TableLayoutPanelSearchElement.Controls.Add(this.SearchTo.TextBoxSearch, 3, 0);
-            this.TableLayoutPanelSearchElement.Controls.Add(this.LabelDate, 0, 1);
-            this.TableLayoutPanelSearchElement.Controls.Add(this.DatePicker, 1, 1);
-            this.TableLayoutPanelSearchElement.Controls.Add(this.LabelTime, 2, 1);
-            this.TableLayoutPanelSearchElement.Controls.Add(this.TimePicker, 3, 1);
-            this.TableLayoutPanelSearchElement.Controls.Add(this.ButtonSearchConnections, 4, 0);
+            this.SplitContainerConnections.Panel1.Controls.Add(this.TableLayoutPanelSearchContainer);
+            this.TableLayoutPanelSearchContainer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            this.TableLayoutPanelSearchContainer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            this.TableLayoutPanelSearchContainer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            this.TableLayoutPanelSearchContainer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+            this.TableLayoutPanelSearchContainer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+            this.TableLayoutPanelSearchContainer.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+            this.TableLayoutPanelSearchContainer.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+            this.TableLayoutPanelSearchContainer.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
+            this.TableLayoutPanelSearchContainer.Controls.Add(this.LabelFrom, 0, 0);
+            this.TableLayoutPanelSearchContainer.Controls.Add(this.SearchFrom.TextBoxSearch, 1, 0);
+            this.TableLayoutPanelSearchContainer.Controls.Add(this.LabelTo, 2, 0);
+            this.TableLayoutPanelSearchContainer.Controls.Add(this.SearchTo.TextBoxSearch, 3, 0);
+            this.TableLayoutPanelSearchContainer.Controls.Add(this.LabelDate, 0, 1);
+            this.TableLayoutPanelSearchContainer.Controls.Add(this.DatePicker, 1, 1);
+            this.TableLayoutPanelSearchContainer.Controls.Add(this.LabelTime, 2, 1);
+            this.TableLayoutPanelSearchContainer.Controls.Add(this.TimePicker, 3, 1);
+            this.TableLayoutPanelSearchContainer.Controls.Add(this.ButtonSearchConnections, 4, 0);
             this.SplitContainerConnections.Panel2.Controls.Add(this.DataGridViewConnections);
             this.DataGridViewConnections.Columns.AddRange(new DataGridViewColumn[] {
                 this.DataGridViewColumnFrom,
@@ -287,6 +274,7 @@ namespace SwissTransportGUI.Views
             });
             this.ConnectionsTab.Controls.Add(this.SearchFrom.ListBoxSuggestions);
             this.ConnectionsTab.Controls.Add(this.SearchTo.ListBoxSuggestions);
+
             // Event handlers
             this.ButtonSearchConnections.Click += new EventHandler(this.ButtonSearchConnectionsClick);
             this.SearchFrom.TextBoxSearch.TextChanged += new EventHandler(this.CheckFieldsCompletion);

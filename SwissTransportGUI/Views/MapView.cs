@@ -11,16 +11,14 @@ namespace SwissTransportGUI.Views
 {
     internal class MapView
     {
-        private readonly string InitialMapLocation = "Luzern, Schweiz";
-
         public TabPage MapTab { get; set; } = new();
+        private readonly string InitialMapLocation = "Luzern, Schweiz";
         private TableLayoutPanel TableLayoutPanelLocationSearch { get; set; } = new();
         private Label LabelLocation { get; set; } = new();
         private SearchUserControl SearchLocation { get; set; } = new(0, 0);
         private Button ButtonSearchLocation { get; set; } = new();
         private GMapControl MapControl { get; set; } = new();
         private GMapOverlay MapMarkers { get; set; } = new();
-
         private ITransport Transport { get; set; }
 
         public MapView()
@@ -38,10 +36,10 @@ namespace SwissTransportGUI.Views
             {
                 BackColor = Color.White,
                 Location = new Point(4, 29),
-                Name = "MapTab",
+                Name = "mapTab",
                 Padding = new Padding(3),
                 Size = new Size(792, 417),
-                TabIndex = 2,
+                TabIndex = 3,
                 Text = "Kartenansicht",
             };
             // Table for the search bar
@@ -52,10 +50,9 @@ namespace SwissTransportGUI.Views
                 ColumnCount = 3,
                 Location = new Point(0, 0),
                 Margin = new Padding(3, 2, 3, 2),
-                Name = "TableLayoutPanelStationSearch",
+                Name = "tableLayoutPanelLocationSearch",
                 Size = new (798, 125),
                 RowCount = 3,
-                TabIndex = 0,
             };
             // Search section controls
             this.LabelLocation = new Label()
@@ -63,9 +60,8 @@ namespace SwissTransportGUI.Views
                 Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Right))),
                 AutoSize = true,
                 Location = new Point(75, 0),
-                Name = "labelStation",
+                Name = "labelLocation",
                 Size = new Size(35, 42),
-                TabIndex = 4,
                 Text = "Station:",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
@@ -80,7 +76,7 @@ namespace SwissTransportGUI.Views
                 Dock = DockStyle.Fill,
                 Enabled = false,
                 Location = new Point(25, 0),
-                Name = "buttonSearchStation",
+                Name = "buttonSearchLocation",
                 Size = new Size(152, 25),
                 TabIndex = 0,
                 Text = "Suchen",
@@ -90,7 +86,7 @@ namespace SwissTransportGUI.Views
             this.MapControl = new GMapControl()
             {
                 Dock = DockStyle.Fill,
-                MinZoom = 2, // below no data
+                MinZoom = 2,
                 MaxZoom = 18,
                 Zoom = 13,
                 ShowCenter = false,
@@ -101,6 +97,7 @@ namespace SwissTransportGUI.Views
             GMaps.Instance.Mode = AccessMode.ServerOnly;
             this.MapControl.SetPositionByKeywords(this.InitialMapLocation);
             this.MapControl.Overlays.Add(MapMarkers);
+
             // Adding controls to containers
             this.TableLayoutPanelLocationSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
             this.TableLayoutPanelLocationSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
@@ -114,6 +111,7 @@ namespace SwissTransportGUI.Views
             this.MapTab.Controls.Add(this.MapControl);
             this.MapTab.Controls.Add(this.TableLayoutPanelLocationSearch);
             this.MapTab.Controls.Add(this.SearchLocation.ListBoxSuggestions);
+
             // Event handlers
             this.MapTab.Paint += new PaintEventHandler(this.StationsNearbyTabPaint);
             this.SearchLocation.ListBoxSuggestions.Click += new EventHandler(this.AutoSuggestClick);

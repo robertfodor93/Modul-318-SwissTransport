@@ -12,7 +12,7 @@ namespace SwissTransportGUI.Models
     {
         public PointLatLng FromStationCoord { get; set; }
         public PointLatLng ToStationCoord { get; set; }
-        public string FromStation { get; set; }
-        public string ToStation { get; set; }
+        public string? FromStation { get; set; }
+        public string? ToStation { get; set; }
     }
 }

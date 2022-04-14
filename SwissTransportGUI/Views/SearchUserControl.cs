@@ -31,7 +31,7 @@ namespace SwissTransportGUI.Views
                 Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point),
                 Location = new Point(searchBoxX, searchBoxY),
                 Margin = new Padding(0),
-                Name = "SearchBox",
+                Name = "textBoxSearc",
                 PlaceholderText = "Station eingeben",
                 TabIndex = 0,
             };
@@ -42,6 +42,7 @@ namespace SwissTransportGUI.Views
                     X = TextBoxSearch.Location.X + 2,
                     Y = TextBoxSearch.Location.Y + TextBoxSearch.Height + 2,
                 },
+                Name = "listBoxSuggestions",
                 Width = TextBoxSearch.Width,
                 Visible = false,
                 DataSource = StationSearcher.StationSuggestions,
@@ -52,6 +53,7 @@ namespace SwissTransportGUI.Views
                 IntegralHeight = true,
                 Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point),
             };
+
             //Event handlers
             this.TextBoxSearch.TextChanged += new EventHandler(this.SearchBoxTextChanged);
             this.TextBoxSearch.GotFocus += new EventHandler(this.ShowAutoSuggestions);
@@ -60,6 +62,7 @@ namespace SwissTransportGUI.Views
             this.TextBoxSearch.KeyDown += new KeyEventHandler(this.SearchBoxHandleKey);
             this.ListBoxSuggestions.Click += new EventHandler(this.AutoSuggestSuggestItem);
         }
+
         //Event logic
         private void SearchBoxHandleKey(object? sender, KeyEventArgs e)
         {

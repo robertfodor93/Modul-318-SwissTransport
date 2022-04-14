@@ -42,7 +42,7 @@ namespace SwissTransportGUI.Views
                 Name = "stationBoardTab",
                 Padding = new Padding(3),
                 Size = new Size(792, 417),
-                TabIndex = 2,
+                TabIndex = 1,
                 Text = "Fahrplan",
             };
             // Station board split container
@@ -63,7 +63,6 @@ namespace SwissTransportGUI.Views
                 Size = new Size(686, 306),
                 SplitterDistance = 125,
                 SplitterWidth = 3,
-                TabIndex = 0,
             };
             // Table for the search bar
             this.TableLayoutPanelStationSearch = new TableLayoutPanel()
@@ -73,9 +72,8 @@ namespace SwissTransportGUI.Views
                 ColumnCount = 3,
                 Location = new Point(0, 0),
                 Margin = new Padding(3, 2, 3, 2),
-                Name = "TableLayoutPanelStationSearch",
+                Name = "tableLayoutPanelStationSearch",
                 RowCount = 3,
-                TabIndex = 0,
             };
             this.LabelStation = new Label()
             {
@@ -84,7 +82,6 @@ namespace SwissTransportGUI.Views
                 Location = new Point(75, 0),
                 Name = "labelStation",
                 Size = new Size(35, 42),
-                TabIndex = 4,
                 Text = "Station:",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
@@ -128,7 +125,7 @@ namespace SwissTransportGUI.Views
                 Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point),
                 Size = new Size(686, 215),
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-                TabIndex = 0,
+                TabIndex = 1,
                 DataSource = StationBoardController.StationBoardItems,
             };
             this.DataGridViewColumnLine = new DataGridViewTextBoxColumn()
@@ -150,7 +147,7 @@ namespace SwissTransportGUI.Views
             {
                 DataPropertyName = "Direction",
                 HeaderText = "Nach",
-                Name = "DataGridViewColumnDirection",
+                Name = "dataGridViewColumnDirection",
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
             };
             this.DataGridViewColumnDelays = new DataGridViewTextBoxColumn()
@@ -167,6 +164,7 @@ namespace SwissTransportGUI.Views
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
                 Width = 100,
             };
+
             //Adding controls to elements
             this.StationBoardTab.Controls.Add(this.SplitContainerStationBoard);
             this.SplitContainerStationBoard.Panel1.Controls.Add(this.TableLayoutPanelStationSearch);
@@ -188,12 +186,14 @@ namespace SwissTransportGUI.Views
                 this.DataGridViewColumnPlatform,
                 this.DataGridViewColumnDelays,
             });
+
             //Event handlers
             this.StationBoardTab.Paint += new PaintEventHandler(this.StationTableTabPaint);
             this.ButtonSearchStation.Click += new System.EventHandler(this.ButtonSearchStationClick);
             this.SearchStation.ListBoxSuggestions.Click += new EventHandler(this.AutoSuggestClick);
             this.SearchStation.TextBoxSearch.TextChanged += new EventHandler(this.CheckInput);
         }
+
         //Event logic
         private void CheckInput(object? sender, EventArgs e)
         {

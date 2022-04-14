@@ -6,7 +6,7 @@ using Xunit;
 
 namespace SwissTransportGUITest
 {
-    public class ConnectionModel
+    public class ConnectionsModelTest
     {
 
         [Fact]

@@ -97,6 +97,7 @@
             };
             return result;
         }
+
         public void Dispose()
         {
             this.httpClient?.Dispose();

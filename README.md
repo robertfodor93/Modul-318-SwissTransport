@@ -1,7 +1,6 @@
-# Modul 318 Projekt
+Modul 318 Projekt
 
 ##### Table of Contents
-* [Einleitung](#einleitung)
 * [Autor](#autor)
 * [Zusammenfassung](#zusammenfassung)
 * [Zweck](#zweck)
@@ -12,7 +11,7 @@
 * [Tests](#tests)
 * [Installation Anleitung](#installation) 
 
-## Einleitung
+## Modul 318 Projekt
 
 <a name="autor"/>
 

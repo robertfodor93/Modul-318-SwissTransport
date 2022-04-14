@@ -112,5 +112,9 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 
 | Schritt | Aktivität                                                     | Erwartetes Resultat                                      |
 | ------- | ------------------------------------------------------------- | -------------------------------------------------------- | 
-| 1       | Bei der Suche nach Verbindungen ein 
-Datum und eine Zeit angeben und auf «Suchen» klicken. |
+| 1       | Bei der Suche nach Verbindungen ein Datum und eine Zeit angeben und auf «Suchen» klicken. | Das Abreisedatum und die Abreisezeit der Verbindungen ist grösser als die eingegebenen Daten|
+
+
+### Unit Tests
+
+![Unittest](/images/Unittests.png)

@@ -79,3 +79,38 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 #### Kartenansicht
 
 ![Mockup](/images/Kartenansicht.png)
+
+## Tests
+
+### Test - Verbindungen suchen
+
+| Schritt | Aktivität                                                     | Erwartetes Resultat                                      |
+| ------- | ------------------------------------------------------------- | -------------------------------------------------------- | 
+| 1       | In das Suchfeld «Von» wird «Luzern» eingegeben und in das Suchfeld «Nach» wird «Zürich» Eingeben und auf den «Suchen» Knopf gedrückt. | Es werden 4 Verbindungen von Luzern nach Zürich angezeigt. |
+
+### Test - Abfahrtstafel
+
+| Schritt | Aktivität                                                     | Erwartetes Resultat                                      |
+| ------- | ------------------------------------------------------------- | -------------------------------------------------------- | 
+| 1       | Auf den Tab «Abfahrtstafel» klicken. | Das Fenster des Tabs «Fahrplan wird angezeigt. |
+| 2       | In das Suchfeld «Station» die Station «Luzern» eingeben und auf «Suchen» klicken | Der Fahrplan der Station Luzern wird Angezeigt |
+
+### Test - Kartenansicht
+
+| Schritt | Aktivität                                                     | Erwartetes Resultat                                      |
+| ------- | ------------------------------------------------------------- | -------------------------------------------------------- | 
+| 1       | Auf den Tab «Kartenansicht» klicken. | Das Fenster des Tabs «Kartenansicht» wird angezeigt. |
+| 2       | In das Suchfeld «Station» die Station «Basel» eingeben und auf «Suchen» klicken. | Die Kartenansicht der SBB Basel wird auf einer Karte angezeigt. |
+
+### Test - Suchvorschläge
+
+| Schritt | Aktivität                                                     | Erwartetes Resultat                                      |
+| ------- | ------------------------------------------------------------- | -------------------------------------------------------- | 
+| 1       | In das Suchfeld «Von» wird «Luzern» eingegeben und in das Suchfeld «Nach» wird «Bern» Eingeben. | Für «Luzern» kommen folgende Vorschläge: (Luzern, Luzern Bahhof, Luzern Kantonalbank). Für «Bern» kommen folgende Vorschläge: (Bern, Bern Bahnhof, Bern Hirschengraben). |
+
+### Test - Zeit und Datum
+
+| Schritt | Aktivität                                                     | Erwartetes Resultat                                      |
+| ------- | ------------------------------------------------------------- | -------------------------------------------------------- | 
+| 1       | Bei der Suche nach Verbindungen ein 
+Datum und eine Zeit angeben und auf «Suchen» klicken. |

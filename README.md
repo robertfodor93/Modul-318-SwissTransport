@@ -6,8 +6,8 @@
 * [Zusammenfassung](#zusammenfassung)
 * [Zweck](#zweck)
 * [User Stories](#userstories) 
-* [Funktonalität](#funktionen) 
-* [Aktiviäts Diagramm](#activitydiagram)
+* [Funktionen](#funktionen) 
+* [Aktivitäts Diagramm](#activitydiagram)
 * [Mockups](#mockups)
 * [Tests](#tests)
 * [Installation Anleitung](#installation) 
@@ -70,7 +70,7 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 
 <a name="activitydiagram"/>
 
-### Aktiviäts Diagramm
+### Aktivitäts Diagramm
 
 
 ![Aktiviäts Diagramm](/images/ActivityDiagramm.png)

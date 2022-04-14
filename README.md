@@ -61,6 +61,6 @@ In der Tabele ist ersichtlich welche Funktionen umgesetz wurden und welche nicht
 ### Aktiviäts Diagramm
 Dieses Diagramm zeigt wie die Funktionen des Programm bedient werden.
 
-![Aktiviäts Diagramm](/)
+![Aktiviäts Diagramm](/images/image.png)
 
 ---

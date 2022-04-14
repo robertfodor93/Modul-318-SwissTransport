@@ -126,7 +126,9 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 
 ## Installationsanleitung
 
-[Installer Herunterladen](https://github.com/robertfodor93/Modul-318-SwissTransport/raw/fb8dfe0a0f399fdc4d219bf35bab8ca684b5fc4a/installer/SwissTransportSetup.msi)
+[Github Installer Ordner](https://github.com/robertfodor93/Modul-318-SwissTransport/tree/master/installer)
+
+[Installer Direkt Herunterladen](https://github.com/robertfodor93/Modul-318-SwissTransport/raw/fb8dfe0a0f399fdc4d219bf35bab8ca684b5fc4a/installer/SwissTransportSetup.msi)
 
 ![Installer](/images/step1.png)
 

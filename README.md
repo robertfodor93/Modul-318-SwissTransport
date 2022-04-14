@@ -62,7 +62,7 @@ Der Zweck dieses Dokumentes dient dazu die Projektarbeit im Modul 318 zu Dokumen
 ### Aktiviäts Diagramm
 
 
-![Aktiviäts Diagramm](/images/image.png)
+![Aktiviäts Diagramm](/images/ActivityDiagramm.png)
 
 <a name="mockups"/>
 
